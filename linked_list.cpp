@@ -13,6 +13,8 @@ struct ListNode{
 
     ListNode(list_t v, ListNode* next) : val(v), nextNode(next) { }
 
+    // explicit conversion operator to convert a ListNode object to a string
+    // debugging function, produces output of type [ListNode | addr: 0xffff val: {value}]
     explicit operator std::string() const {
         std::ostringstream oss;
         oss << "[ListNode | addr: " << this << " val: " << this->val << "]\n";
