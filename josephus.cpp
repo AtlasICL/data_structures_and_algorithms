@@ -4,10 +4,8 @@
 #include <vector>
 #include <cassert>
 #include <stdexcept>
+#include <optional>
 
-const int LIVES = 3; // number of lives per soldier (node)
-const int SKIPS = 0; // number of skips before we start the election algorithm
-const int K = 3;     // every k nodes, we eliminate a node
 
 // definition for JNode (Josephus Node)
 // similar to singly linked list, but the last node points back to the head
@@ -84,14 +82,32 @@ void printJosephusList(JNode* head) {
 
 // this function implements the Josephus election algorithm, eliminating every k nodes
 // returns the value of the last remaining node
-std::string josephusElection(JNode* head, int k){
+std::string josephusElection(JNode* head, int k, int startingIndex = 0){
     
+    if (head == nullptr){
+        throw std::invalid_argument("Empty list passed to josephusElection()");
+    }
+
     JNode* current = head;
 
+    // skip forward startingIndex times, so that we start the election algorithm from the desired starting index
+    for (int i = 0; i < startingIndex; i++){
+        current = current->next;
+    }
+
+    // body of the election algorithm
     do {
+        // go forward by k steps
         for (int i = 0; i < k-1; i++){
             current = current->next;
         }
+
+        // if we are about to eliminate the head, then head would point to a deleted node
+        // so we update head before eliminating the node
+        if (current->next == head) {
+            head = head->next;
+        } 
+        // eliminate the node
         JNode* tmp = current->next;
         current->next = current->next->next;
 
@@ -99,7 +115,7 @@ std::string josephusElection(JNode* head, int k){
 
     } while (countNodes(head) > 1);
 
-    return head->val;
+    return head->val; // return value of the last remaining node
 
 }
 
