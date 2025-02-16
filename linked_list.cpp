@@ -92,7 +92,37 @@ public:
 
     // this function inserts a node at a specified index of the linked list
     void insertAtIndex(list_t v, int idx){
+        // check provided index is positive
+        if (idx < 0) {
+            throw std::invalid_argument("Negative index not allowed.");
+        }
+        // check provided index is not bigger than length of the list
+        // list is 0-indexed, so we use >=
+        if (idx >= this.countNodes()){
+            throw std::out_of_range("index is out of range for insertion.")
+        }
 
+        // body of the function for insertion
+
+        // if insertion at idx 0, special case insert at head
+        if (idx == 0) {
+            insertAtHead(v);
+            return;
+        }
+
+        // traverse to the node at idx
+        ListNode* current = head;
+        for (int i = 0; i < idx - 1; ++i) {
+            current = current->nextNode;
+        }
+
+        ListNode* tmp = new ListNode(v, current->nextNode);
+        current->nextNode = tmp;
+        
+        // if idx was the last element, update tail
+        if (current == tail) {
+            tail = tmp;
+        }
     }
 
     // this function deletes the first instance of a value in the linked list
