@@ -26,6 +26,19 @@ private:
 public:
     LinkedList() : head(nullptr), tail(nullptr) { }
 
+    // destructor should deallocate all memory used by the list
+    ~LinkedList(){
+        ListNode* current = head;
+        ListNode* tmp;
+
+        while (current != nullptr){
+            tmp = current->nextNode;
+            delete current;
+            current = tmp;
+        }
+    }
+
+    // this function creates a linked list with the values provided by the vector argument
     void createList(const std::vector<list_t>& values){
         head = nullptr;
         tail = nullptr;
@@ -148,6 +161,43 @@ public:
     // this function deletes the first instance of a value in the linked list
     // returns true if a deletion occurred, else false (the value was not found in the list)
     bool deleteFirstInstance(const list_t v){
+        
+        // if the list is empty, we do not delete anything, hence return false
+        if (head == nullptr){
+            return false;
+        }
+
+        // check the case where head contains the target value
+        if (head->val == v){
+            ListNode* tmp = head;
+            head = head->nextNode;
+
+            if (head == nullptr){
+                // if the list becomes empty after the deletion we need to update tail to be null too
+                // otherwise tail will point to a deleted node, which causes undefined behaviour
+                tail == nullptr;
+            }
+
+            delete tmp; // free the memory of the deleted node
+            return true; // return true as a deletion did take place
+        }
+
+        // traverse the list
+        ListNode* current = head;
+        while (current->nextNode != nullptr){
+            if (current->nextNode->val == v){
+                ListNode* tmp = current->nextNode;
+                current->nextNode = current->nextNode->nextNode;
+
+                delete tmp; // free the memory of the deleted node
+                return true;
+            }
+            current = current->nextNode;
+        }
+        
+        // if we have traversed the list without finding v, then the element was not present in the list
+        // therefore we cannot delete, so we return false.
+        assert(this->countInstances(v) == 0 && "check delete first instance") 
         return false;
     }
 
@@ -159,7 +209,16 @@ public:
 
     // this function returns the number of the nodes with the specified value
     int countInstances(const list_t v) const {
-        return 0;
+        int counter = 0; // counts the number of occurrences of v
+        ListNode* current = head;
+
+        // traverse the list
+        while (current != nullptr){
+            counter += current->val == v;
+            current = current->nextNode;
+        }
+
+        return counter;
     }
 
     // this function reverses the order of the linked list
@@ -182,6 +241,7 @@ public:
         }
     }
 };
+
 
 
 int main(){
