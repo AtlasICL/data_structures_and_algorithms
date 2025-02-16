@@ -2,6 +2,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <cassert>
+#include <stdexcept>
 
 typedef int list_t;
 
@@ -25,6 +27,10 @@ private:
 
 public:
     LinkedList() : head(nullptr), tail(nullptr) { }
+
+    LinkedList(const std::vector<list_t>& values){
+        this->createList(values);
+    }
 
     // destructor should deallocate all memory used by the list
     ~LinkedList(){
@@ -62,11 +68,11 @@ public:
 
     // this function returns the number of nodes in the linked list
     int countNodes() const {
-        int nodeCount = 1; 
+        int nodeCount = 0;
         ListNode* ptr = head;
-        while (ptr->nextNode != nullptr){
-            ptr = ptr->nextNode;
+        while (ptr != nullptr) {
             nodeCount++;
+            ptr = ptr->nextNode;
         }
         return nodeCount;
     }
@@ -175,7 +181,7 @@ public:
             if (head == nullptr){
                 // if the list becomes empty after the deletion we need to update tail to be null too
                 // otherwise tail will point to a deleted node, which causes undefined behaviour
-                tail == nullptr;
+                tail = nullptr;
             }
 
             delete tmp; // free the memory of the deleted node
@@ -189,6 +195,10 @@ public:
                 ListNode* tmp = current->nextNode;
                 current->nextNode = current->nextNode->nextNode;
 
+                if (tmp == tail) {
+                    tail = current;
+                }
+
                 delete tmp; // free the memory of the deleted node
                 return true;
             }
@@ -197,14 +207,13 @@ public:
         
         // if we have traversed the list without finding v, then the element was not present in the list
         // therefore we cannot delete, so we return false.
-        assert(this->countInstances(v) == 0 && "check delete first instance") 
+        assert(this->countInstances(v) == 0 && "check delete first instance");
         return false;
     }
 
     // this function deletes all instances of a value in the linked list
-    // returns true if at least one deletion occurred, else false (the value was not found in the list)
-    bool deleteAllInstances(const list_t v){
-        return false;
+    void deleteAllInstances(const list_t v){
+        while (deleteFirstInstance(v)){} // delete the first instance of v repeatedly, until it returns false
     }
 
     // this function returns the number of the nodes with the specified value
@@ -223,7 +232,8 @@ public:
 
     // this function reverses the order of the linked list
     void reverse(){
-
+        // not implemented yet
+        throw std::logic_error("reverse() member function not yet implemented");
     }
 
     // this function prints the linked list to the terminal
@@ -248,7 +258,37 @@ int main(){
 
     LinkedList myList;
     myList.createList({2, 4, 5, 6, 7, 9});
-
     myList.print();
+    std::cout << "------------------------" << std::endl;
+
+    myList.insertAtHead(8);
+    myList.insertAtHead(3);
+    myList.print();
+    std::cout << "------------------------" << std::endl;
+
+    myList.insertAtTail(12);
+    myList.insertAtTail(0);
+    myList.print();
+    std::cout << "------------------------" << std::endl;
+
+    int numberOfNodes = myList.countNodes();
+    std::cout << "current number of nodes = " << numberOfNodes << std::endl;
+    std::cout << "------------------------" << std::endl;
+
+    myList.insertAtIndex(-3, 3);
+    std::cout << "inserted -3 at index 3\n";
+    myList.print();
+    std::cout << "------------------------" << std::endl;
+
+    myList.insertAtIndex(7, 6);
+    std::cout << "inserted 7 at index 6\n";
+    myList.print();
+    std::cout << "------------------------" << std::endl;
+
+    int numOfThree = myList.countInstances(3);
+    std::cout << "num of 3s = " << numOfThree << "\n";
+    myList.print();
+    std::cout << "------------------------" << std::endl;
 
 }
+
