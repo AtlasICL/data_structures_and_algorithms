@@ -74,7 +74,7 @@ public:
     }
 
     // this function inserts a node at the tail of the linked list
-    void insertAtTail(list_t v){
+    void insertAtTail(const list_t v){
         // if the list is empty, we set both head and tail to be this new node
         if (head == nullptr){
             ListNode* tmp = new ListNode(v, nullptr);
@@ -91,7 +91,7 @@ public:
     }
 
     // this function inserts a node at a specified index of the linked list
-    void insertAtIndex(list_t v, int idx){
+    void insertAtIndex(const list_t v, const int idx){
         // check provided index is positive
         if (idx < 0) {
             throw std::invalid_argument("Negative index not allowed.");
@@ -125,15 +125,35 @@ public:
         }
     }
 
+    // this function returns true if the linked list contains a node with the value v
+    // false otherwise
+    bool contains(const list_t v) const {
+        if (head == nullptr){
+            // the list is empty, and therefore definitely does not contain the value v
+            return false;
+        }
+
+        ListNode* current = head;
+
+        // iterate through the nodes
+        while (current != nullptr){
+            if (current->val == v){
+                return true;
+            }
+            current = current->nextNode;
+        }
+        return false;
+    }
+
     // this function deletes the first instance of a value in the linked list
     // returns true if a deletion occurred, else false (the value was not found in the list)
-    bool deleteFirstInstance(list_t v){
+    bool deleteFirstInstance(const list_t v){
         return false;
     }
 
     // this function deletes all instances of a value in the linked list
     // returns true if at least one deletion occurred, else false (the value was not found in the list)
-    bool deleteAllInstances(list_t v){
+    bool deleteAllInstances(const list_t v){
         return false;
     }
 
@@ -142,10 +162,13 @@ public:
         return 0;
     }
 
+    // this function reverses the order of the linked list
     void reverse(){
 
     }
 
+    // this function prints the linked list to the terminal
+    // with the mem addr and the value of each list node
     void print() const {
         if (head == nullptr) {
             std::cout << "Empty list" << std::endl;
