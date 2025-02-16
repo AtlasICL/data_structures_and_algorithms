@@ -98,8 +98,8 @@ public:
         }
         // check provided index is not bigger than length of the list
         // list is 0-indexed, so we use >=
-        if (idx >= this.countNodes()){
-            throw std::out_of_range("index is out of range for insertion.")
+        if (idx >= this->countNodes()){
+            throw std::out_of_range("index is out of range for insertion.");
         }
 
         // body of the function for insertion
