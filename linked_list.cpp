@@ -232,10 +232,20 @@ public:
         return counter;
     }
 
-    // this function reverses the order of the linked list
+    // this function reverses the order of the linked list in-place
     void reverse(){
-        // not implemented yet
-        throw std::logic_error("reverse() member function not yet implemented");
+        ListNode* previous = nullptr;
+        ListNode* current = this->head;
+
+        while (current != nullptr){
+            ListNode* tmp = current->nextNode;  // save the next node
+            current->nextNode = previous;       // reversal, current->next now points to its preceding node
+            previous = current;                 // previous becomes current
+            current = tmp;                      // current becomes next node
+        }
+
+        this->tail = this->head;   // the old tail becomes the head
+        this->head = previous;     // the new head is the last node pointed to by previous (as current is null at end of while loop)
     }
 
     // this function prints the linked list to the terminal
