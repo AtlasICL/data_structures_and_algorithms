@@ -4,7 +4,6 @@
 #include <vector>
 #include <cassert>
 #include <stdexcept>
-#include <optional>
 
 
 // definition for JNode (Josephus Node)
