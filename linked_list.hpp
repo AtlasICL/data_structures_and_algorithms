@@ -6,6 +6,7 @@
 #include <vector>
 #include <cassert>
 #include <stdexcept>
+#include <utility>
 
 template<typename list_t>
 struct ListNode{
@@ -47,6 +48,24 @@ public:
             current = tmp;
         }
     }
+
+    // copy constructor - we want to implement deep copy instead of shallow copy
+    LinkedList(const LinkedList& other) : head(nullptr), tail(nullptr) {
+        for (ListNode<list_t>* current = other.head; current != nullptr; current = current->nextNode){
+            insertAtTail(current->val);
+        }
+    }
+
+    // assignment operator
+    LinkedList& operator=(const LinkedList& other){
+        if (this != &other){          // check we are not doing a = a, in which case no work needs to be done
+            LinkedList tmp(other);   // create a temporary copy of the "copied" instance
+            swap(tmp);               // swap the contents of this object with temporary copy
+        }
+        return *this;
+    }
+
+
 
     // this function creates a linked list with the values provided by the vector argument
     void createList(const std::vector<list_t>& values){
@@ -265,6 +284,12 @@ public:
             // using the explicit conversion operator to convert the node to a string
             std::cout << static_cast<std::string>(*current);
         }
+    }
+
+    // helper function to swap the internals of two LinkedList objects
+    void swap(LinkedList& other) noexcept {
+        std::swap(head, other.head);
+        std::swap(tail, other.tail);
     }
 };
 
