@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -5,13 +7,12 @@
 #include <cassert>
 #include <stdexcept>
 
-typedef int list_t;
-
+template<typename list_t>
 struct ListNode{
     list_t val;
-    ListNode* nextNode;
+    ListNode<list_t>* nextNode;
 
-    ListNode(list_t v, ListNode* next) : val(v), nextNode(next) { }
+    ListNode(list_t v, ListNode<list_t>* next) : val(v), nextNode(next) { }
 
     // explicit conversion operator to convert a ListNode object to a string
     // debugging function, produces output of type [ListNode | addr: 0xffff val: {value}]
@@ -22,10 +23,11 @@ struct ListNode{
     }
 };
 
+template<typename list_t>
 class LinkedList{
 private:
-    ListNode* head;
-    ListNode* tail;
+    ListNode<list_t>* head;
+    ListNode<list_t>* tail;
 
 public:
     LinkedList() : head(nullptr), tail(nullptr) { }
@@ -36,8 +38,8 @@ public:
 
     // destructor should deallocate all memory used by the list
     ~LinkedList(){
-        ListNode* current = head;
-        ListNode* tmp;
+        ListNode<list_t>* current = head;
+        ListNode<list_t>* tmp;
 
         while (current != nullptr){
             tmp = current->nextNode;
@@ -52,7 +54,7 @@ public:
         tail = nullptr;
 
         for (const list_t& value : values){
-            ListNode* newNode = new ListNode(value, nullptr);
+            ListNode<list_t>* newNode = new ListNode<list_t>(value, nullptr);
 
             // if the list is empty, this created new node becomes both the head and the tail
             // as it is the only node in the list
@@ -71,7 +73,7 @@ public:
     // this function returns the number of nodes in the linked list
     int countNodes() const {
         int nodeCount = 0;
-        ListNode* ptr = head;
+        ListNode<list_t>* ptr = head;
         while (ptr != nullptr) {
             nodeCount++;
             ptr = ptr->nextNode;
@@ -83,14 +85,14 @@ public:
     void insertAtHead(const list_t v){
         // if the list is empty, we set both head and tail to be this new node
         if (head == nullptr){
-            ListNode* tmp = new ListNode(v, nullptr);
+            ListNode<list_t>* tmp = new ListNode<list_t>(v, nullptr);
             this->head = tmp;
             this->tail = tmp;
             return;
         }
 
         // otherwise we add a new node, which has next = head, then we update head
-        ListNode* tmp = new ListNode(v, head);
+        ListNode<list_t>* tmp = new ListNode<list_t>(v, head);
         this->head = tmp;
     }
 
@@ -98,7 +100,7 @@ public:
     void insertAtTail(const list_t v){
         // if the list is empty, we set both head and tail to be this new node
         if (head == nullptr){
-            ListNode* tmp = new ListNode(v, nullptr);
+            ListNode<list_t>* tmp = new ListNode<list_t>(v, nullptr);
             this->head = tmp;
             this->tail = tmp;
             return;
@@ -106,7 +108,7 @@ public:
 
         // otherwise we add a new node, which has next = nullptr, as it as the tail
         // we link the new node to the previous tail, then we update tail
-        ListNode* tmp = new ListNode(v, nullptr);
+        ListNode<list_t>* tmp = new ListNode<list_t>(v, nullptr);
         this->tail->nextNode = tmp;
         this->tail = tmp;
     }
@@ -132,12 +134,12 @@ public:
         }
 
         // traverse to the node at idx
-        ListNode* current = head;
+        ListNode<list_t>* current = head;
         for (int i = 0; i < idx - 1; ++i) {
             current = current->nextNode;
         }
 
-        ListNode* tmp = new ListNode(v, current->nextNode);
+        ListNode<list_t>* tmp = new ListNode<list_t>(v, current->nextNode);
         current->nextNode = tmp;
         
         // if idx was the last element, update tail
@@ -154,7 +156,7 @@ public:
             return false;
         }
 
-        ListNode* current = head;
+        ListNode<list_t>* current = head;
 
         // iterate through the nodes
         while (current != nullptr){
@@ -177,7 +179,7 @@ public:
 
         // check the case where head contains the target value
         if (head->val == v){
-            ListNode* tmp = head;
+            ListNode<list_t>* tmp = head;
             head = head->nextNode;
 
             if (head == nullptr){
@@ -191,10 +193,10 @@ public:
         }
 
         // traverse the list
-        ListNode* current = head;
+        ListNode<list_t>* current = head;
         while (current->nextNode != nullptr){
             if (current->nextNode->val == v){
-                ListNode* tmp = current->nextNode;
+                ListNode<list_t>* tmp = current->nextNode;
                 current->nextNode = current->nextNode->nextNode;
 
                 if (tmp == tail) {
@@ -216,12 +218,14 @@ public:
     // this function deletes all instances of a value in the linked list
     void deleteAllInstances(const list_t v){
         while (deleteFirstInstance(v)){} // delete the first instance of v repeatedly, until it returns false
+        // this implementation is not particularly efficient, as we traverse the list multiple times
+        // this could be implemented with only one travesal of the list.
     }
 
     // this function returns the number of the nodes with the specified value
     int countInstances(const list_t v) const {
         int counter = 0; // counts the number of occurrences of v
-        ListNode* current = head;
+        ListNode<list_t>* current = head;
 
         // traverse the list
         while (current != nullptr){
@@ -234,11 +238,11 @@ public:
 
     // this function reverses the order of the linked list in-place
     void reverse(){
-        ListNode* previous = nullptr;
-        ListNode* current = this->head;
+        ListNode<list_t>* previous = nullptr;
+        ListNode<list_t>* current = this->head;
 
         while (current != nullptr){
-            ListNode* tmp = current->nextNode;  // save the next node
+            ListNode<list_t>* tmp = current->nextNode;  // save the next node
             current->nextNode = previous;       // reversal, current->next now points to its preceding node
             previous = current;                 // previous becomes current
             current = tmp;                      // current becomes next node
@@ -257,50 +261,10 @@ public:
         }
         
         // iterate through each node in the list
-        for (ListNode* current = head; current != nullptr; current = current->nextNode) {
+        for (ListNode<list_t>* current = head; current != nullptr; current = current->nextNode) {
             // using the explicit conversion operator to convert the node to a string
             std::cout << static_cast<std::string>(*current);
         }
     }
 };
-
-
-
-int main(){
-
-    LinkedList myList;
-    myList.createList({2, 4, 5, 6, 7, 9});
-    myList.print();
-    std::cout << "------------------------" << std::endl;
-
-    myList.insertAtHead(8);
-    myList.insertAtHead(3);
-    myList.print();
-    std::cout << "------------------------" << std::endl;
-
-    myList.insertAtTail(12);
-    myList.insertAtTail(0);
-    myList.print();
-    std::cout << "------------------------" << std::endl;
-
-    int numberOfNodes = myList.countNodes();
-    std::cout << "current number of nodes = " << numberOfNodes << std::endl;
-    std::cout << "------------------------" << std::endl;
-
-    myList.insertAtIndex(-3, 3);
-    std::cout << "inserted -3 at index 3\n";
-    myList.print();
-    std::cout << "------------------------" << std::endl;
-
-    myList.insertAtIndex(7, 6);
-    std::cout << "inserted 7 at index 6\n";
-    myList.print();
-    std::cout << "------------------------" << std::endl;
-
-    int numOfThree = myList.countInstances(3);
-    std::cout << "num of 3s = " << numOfThree << "\n";
-    myList.print();
-    std::cout << "------------------------" << std::endl;
-
-}
 
