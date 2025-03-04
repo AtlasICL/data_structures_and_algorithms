@@ -45,8 +45,14 @@ public:
 
     void enqueue(T val){
         QueueNode<T>* tmp = new QueueNode<T>(val);
-        tail->next = tmp;
-        tail = tail->next;
+        if (tail == nullptr){ // Queue is empty
+            head = tmp;
+            tail = tmp;
+        }
+        else {
+            tail->next = tmp;
+            tail = tail->next;
+        }
     }
 
     T dequeue(){
@@ -54,10 +60,13 @@ public:
             throw std::out_of_range("Called dequeue on empty queue");
         }
         QueueNode<T>* tmp = head;
-        T val = head->val;
+        T value = head->val;
         head = head->next;
+        if (head == nullptr){ // Queue becomes empty
+            tail = nullptr;
+        }
         delete tmp;
-        return val;
+        return value;
     }
 
     int size() const {
@@ -73,7 +82,31 @@ public:
         return counter;
     }
 
+    void print() const {
+        QueueNode<T>* curr = head;
+        std::cout << "Queue{\n";
+        while (curr != nullptr){
+            std::cout << "    " << static_cast<std::string>(*curr);
+            curr = curr->next;
+        }
+        std::cout << "}" << std::endl;
+    }
+
 };
 
+} // namespace atlas
+
+
+
+int main(){
+    atlas::Queue<int> myQ;
+
+    myQ.enqueue(2);
+    myQ.enqueue(6);
+    myQ.enqueue(5);
+    myQ.enqueue(3);
+    myQ.enqueue(9);
+
+    myQ.print();
 }
 
