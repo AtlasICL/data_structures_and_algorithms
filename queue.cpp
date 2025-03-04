@@ -35,6 +35,14 @@ private:
 public:
     Queue() : head(nullptr), tail(nullptr) { }
 
+    ~Queue(){
+        while (head != nullptr){
+            QueueNode<T>* tmp = head->next;
+            delete head;
+            head = tmp;
+        }
+    }
+
     void enqueue(T val){
         QueueNode<T>* tmp = new QueueNode<T>(val);
         tail->next = tmp;
