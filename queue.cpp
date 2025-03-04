@@ -14,7 +14,7 @@ struct QueueNode{
 
     QueueNode() : val(), next(nullptr) { }
     QueueNode(T val) : val(val), next(nullptr) { }
-    QueueNode(T val, QueueNode* next) : val(val), next(next) { }
+    QueueNode(T val, QueueNode<T>* next) : val(val), next(next) { }
 
     // Explicit conversion operator to convert from QueueNode object to a string.
     // Output of type [ListNode | addr: 0xffff val: {value}].
