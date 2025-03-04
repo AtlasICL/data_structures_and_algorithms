@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stdexcept>
+#include <string>
+#include <sstream>
 
 namespace atlas
 {
@@ -11,7 +13,16 @@ struct Node{
 
     Node(const T& val) : val(val), next(nullptr) { }
     Node(const T& val, Node<T>* next) : val(val), next(next) { }
+
+    // Explicit conversion operator to convert from QueueNode object to a string.
+    // Output of type [StackItem | addr: 0xffff val: {value}].
+    explicit operator std::string() const {
+        std::ostringstream oss;
+        oss << "[Stack Item | addr: " << this << " val: " << this->val << "]\n";
+        return oss.str();
+    }
 };
+
 
 
 template<typename T>
