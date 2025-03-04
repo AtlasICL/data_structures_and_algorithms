@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 
+namespace atlas
+{
 
 template<typename T>
 struct Node{
@@ -62,4 +64,4 @@ public:
     }
 };
 
-
+}

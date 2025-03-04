@@ -6,6 +6,9 @@
 #include <stdexcept>
 #include <utility>
 
+namespace atlas
+{
+
 template<typename list_t>
 struct ListNode{
     list_t val;
@@ -291,3 +294,4 @@ public:
     }
 };
 
+}
