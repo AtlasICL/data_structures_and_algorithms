@@ -29,14 +29,43 @@ struct QueueNode{
 template<typename T>
 class Queue {
 private:
-    QueueNode* head;
-    QueueNode* tail;
+    QueueNode<T>* head;
+    QueueNode<T>* tail;
 
 public:
     Queue() : head(nullptr), tail(nullptr) { }
 
-    
+    void enqueue(T val){
+        QueueNode<T>* tmp = new QueueNode<T>(val);
+        tail->next = tmp;
+        tail = tail->next;
+    }
+
+    T dequeue(){
+        if (head == nullptr){
+            throw std::out_of_range("Called dequeue on empty queue");
+        }
+        QueueNode<T>* tmp = head;
+        T val = head->val;
+        head = head->next;
+        delete tmp;
+        return val;
+    }
+
+    int size() const {
+        if (head == nullptr){
+            return 0;
+        }
+        int counter = 0;
+        QueueNode<T>* curr = head;
+        while (curr != nullptr){
+            curr = curr->next;
+            counter++;
+        }
+        return counter;
+    }
 
 };
 
 }
+
