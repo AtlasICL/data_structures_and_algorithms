@@ -120,12 +120,15 @@ std::string josephusElection(JNode* head, int k, int startingIndex = 0){
 
 int main()
 {
-    std::vector<std::string> names = {"a", "b", "c", "e", "g", "z"};
+    std::vector<std::string> names = {"Etienne", "Luca", "Emre", "Akkshay", "Kazy", "Noe"};
     JNode* jos = createJosephusList(names);
     printJosephusList(jos);
 
     int numNodes = countNodes(jos);
     std::cout << "Number of nodes = " << numNodes << std::endl;
+
+    std::string winner = josephusElection(jos, 3, 0);
+    std::cout << winner << std::endl;
 }
 
 
