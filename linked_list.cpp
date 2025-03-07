@@ -141,7 +141,7 @@ public:
         }
         // check provided index is not bigger than length of the list
         // list is 0-indexed, so we use >=
-        if (idx >= this->countNodes()){
+        if (idx > this->countNodes()){
             throw std::out_of_range("index is out of range for insertion.");
         }
 
@@ -151,6 +151,11 @@ public:
         if (idx == 0) {
             insertAtHead(v);
             return;
+        }
+
+        // if insertion is at the tail, special case
+        if (idx == countNodes()){
+            insertAtTail(v);
         }
 
         // traverse to the node at idx
