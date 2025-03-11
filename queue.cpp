@@ -33,14 +33,34 @@ private:
     QueueNode<T>* tail;
 
 public:
+    // Constructor
     Queue() : head(nullptr), tail(nullptr) { }
 
+    // Destructor, frees memory
     ~Queue(){
         while (head != nullptr){
             QueueNode<T>* tmp = head->next;
             delete head;
             head = tmp;
         }
+    }
+
+    // Copy constructor
+    Queue(const Queue& other) : head(nullptr), tail(nullptr) {
+        QueueNode<T>* current = other.head;
+        while (current != nullptr) {
+            enqueue(current->val);
+            current = current->next;
+        }
+    }
+
+    // Assignment operator
+    Queue& operator=(const Queue& other) {
+        if (this != &other) {
+            Queue tmp(other);
+            swap(tmp);
+        }
+        return *this;
     }
 
     void enqueue(T val){
@@ -90,6 +110,12 @@ public:
             curr = curr->next;
         }
         std::cout << "}" << std::endl;
+    }
+
+    // Helper function
+    void swap(Queue& other) noexcept {
+        std::swap(head, other.head);
+        std::swap(tail, other.tail);
     }
 
 };
