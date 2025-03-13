@@ -32,7 +32,7 @@ public:
     Stack() : head(nullptr) {}
     
     // the destructor frees the memory used by the stack
-    ~Stack(){
+    ~Stack() {
         while (head != nullptr) {
             Node<T>* tmp = head;
             head = head->next;
