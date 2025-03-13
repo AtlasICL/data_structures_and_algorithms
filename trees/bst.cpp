@@ -32,7 +32,7 @@ public:
             return; 
         }
 
-        if (root == nullptr) { // tree is empty, insert as root
+        if (root == nullptr) { // tree is empty, insert at root
             root = new TreeNode(val);
             return;
         }
