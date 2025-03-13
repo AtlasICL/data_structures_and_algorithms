@@ -49,9 +49,7 @@ public:
 
     // remove an element from the top of the stack
     void pop() {
-        if (this->isEmpty()) {
-            throw std::runtime_error("Attempted to pop from empty stack");
-        }
+        if (this->isEmpty()) { throw std::runtime_error("Attempted to pop from empty stack"); }
         
         Node<T>* tmp = head;
         head = head->next;
@@ -60,9 +58,7 @@ public:
     
     // returns the value of the top element
     T top() const {
-        if (isEmpty()) {
-            throw std::runtime_error("Attempted to get top from empty stack");
-        }
+        if (isEmpty()) { throw std::runtime_error("Attempted to get top from empty stack"); }
 
         return head->val;
     }
