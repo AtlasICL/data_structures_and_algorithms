@@ -33,7 +33,7 @@ private:
 public:
     Queue() : head(nullptr), tail(nullptr) {}
 
-    ~Queue(){
+    ~Queue() {
         while (head != nullptr) {
             QueueNode<T>* tmp = head->next;
             delete head;
@@ -59,7 +59,7 @@ public:
         return *this;
     }
 
-    void enqueue(T val){
+    void enqueue(T val) {
         QueueNode<T>* tmp = new QueueNode<T>(val);
         if (tail == nullptr) { // Queue is empty
             head = tmp;
@@ -71,7 +71,7 @@ public:
         }
     }
 
-    T dequeue(){
+    T dequeue() {
         if (head == nullptr) {
             throw std::out_of_range("Called dequeue on empty queue");
         }
