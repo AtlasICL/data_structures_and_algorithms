@@ -48,6 +48,7 @@ public:
     }
 
     // remove an element from the top of the stack
+    // @throws runtime_error if stack is empty
     void pop() {
         if (this->isEmpty()) { throw std::runtime_error("Attempted to pop from empty stack"); }
         
@@ -57,6 +58,7 @@ public:
     }
     
     // returns the value of the top element
+    // @throws runtime_error if stack is empty
     T top() const {
         if (isEmpty()) { throw std::runtime_error("Attempted to get top from empty stack"); }
 

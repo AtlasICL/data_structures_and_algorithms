@@ -132,6 +132,8 @@ public:
     }
 
     // this function inserts a node at a specified index of the linked list
+    // @throws invalid argument if index is negative
+    // @throws out_of_range error if provided index > number of nodes in list
     void insertAtIndex(const T v, const int idx) {
         // check provided index is positive
         if (idx < 0) {

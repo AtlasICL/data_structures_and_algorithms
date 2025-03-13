@@ -59,6 +59,7 @@ public:
         return *this;
     }
 
+    // adds an element to the back of the queue
     void enqueue(T val) {
         QueueNode<T>* tmp = new QueueNode<T>(val);
         if (tail == nullptr) { // Queue is empty
@@ -71,6 +72,8 @@ public:
         }
     }
 
+    // removes the first element of the queue
+    // @throws out_of_range error if queue is empty
     T dequeue() {
         if (head == nullptr) {
             throw std::out_of_range("Called dequeue on empty queue");
