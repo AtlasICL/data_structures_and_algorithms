@@ -6,15 +6,13 @@
 #include <stdexcept>
 #include <utility>
 
-namespace atlas
-{
 
 template<typename T>
-struct ListNode{
+struct ListNode {
     T val;
     ListNode<T>* nextNode;
 
-    ListNode(T v, ListNode<T>* next) : val(v), nextNode(next) { }
+    ListNode(T v, ListNode<T>* next) : val(v), nextNode(next) {}
 
     // explicit conversion operator to convert a ListNode object to a string
     // debugging function, produces output of type [ListNode | addr: 0xffff val: {value}]
@@ -26,24 +24,24 @@ struct ListNode{
 };
 
 template<typename T>
-class LinkedList{
+class LinkedList {
 private:
     ListNode<T>* head;
     ListNode<T>* tail;
 
 public:
-    LinkedList() : head(nullptr), tail(nullptr) { }
+    LinkedList() : head(nullptr), tail(nullptr) {}
 
-    LinkedList(const std::vector<T>& values){
+    LinkedList(const std::vector<T>& values) {
         this->createList(values);
     }
 
     // destructor should deallocate all memory used by the list
-    ~LinkedList(){
+    ~LinkedList() {
         ListNode<T>* current = head;
         ListNode<T>* tmp;
 
-        while (current != nullptr){
+        while (current != nullptr) {
             tmp = current->nextNode;
             delete current;
             current = tmp;
@@ -52,14 +50,14 @@ public:
 
     // copy constructor - we want to implement deep copy instead of shallow copy
     LinkedList(const LinkedList& other) : head(nullptr), tail(nullptr) {
-        for (ListNode<T>* current = other.head; current != nullptr; current = current->nextNode){
+        for (ListNode<T>* current = other.head; current != nullptr; current = current->nextNode) {
             insertAtTail(current->val);
         }
     }
 
     // assignment operator
-    LinkedList& operator=(const LinkedList& other){
-        if (this != &other){          // check we are not doing a = a, in which case no work needs to be done
+    LinkedList& operator=(const LinkedList& other) {
+        if (this != &other) {        // check we are not doing a = a, in which case no work needs to be done
             LinkedList tmp(other);   // create a temporary copy of the "copied" instance
             swap(tmp);               // swap the contents of this object with temporary copy
         }
@@ -69,16 +67,16 @@ public:
 
 
     // this function creates a linked list with the values provided by the vector argument
-    void createList(const std::vector<T>& values){
+    void createList(const std::vector<T>& values) {
         head = nullptr;
         tail = nullptr;
 
-        for (const T& value : values){
+        for (const T& value : values) {
             ListNode<T>* newNode = new ListNode<T>(value, nullptr);
 
             // if the list is empty, this created new node becomes both the head and the tail
             // as it is the only node in the list
-            if (head == nullptr){
+            if (head == nullptr) {
                 head = newNode;
                 tail = newNode;
             }
@@ -102,9 +100,9 @@ public:
     }
 
     // this function inserts a node at the head of the linked list
-    void insertAtHead(const T v){
+    void insertAtHead(const T v) {
         // if the list is empty, we set both head and tail to be this new node
-        if (head == nullptr){
+        if (head == nullptr) {
             ListNode<T>* tmp = new ListNode<T>(v, nullptr);
             this->head = tmp;
             this->tail = tmp;
@@ -117,9 +115,9 @@ public:
     }
 
     // this function inserts a node at the tail of the linked list
-    void insertAtTail(const T v){
+    void insertAtTail(const T v) {
         // if the list is empty, we set both head and tail to be this new node
-        if (head == nullptr){
+        if (head == nullptr) {
             ListNode<T>* tmp = new ListNode<T>(v, nullptr);
             this->head = tmp;
             this->tail = tmp;
@@ -134,14 +132,14 @@ public:
     }
 
     // this function inserts a node at a specified index of the linked list
-    void insertAtIndex(const T v, const int idx){
+    void insertAtIndex(const T v, const int idx) {
         // check provided index is positive
         if (idx < 0) {
             throw std::invalid_argument("Negative index not allowed.");
         }
         // check provided index is not bigger than length of the list
         // list is 0-indexed, so we use >=
-        if (idx > this->countNodes()){
+        if (idx > this->countNodes()) {
             throw std::out_of_range("index is out of range for insertion.");
         }
 
@@ -154,7 +152,7 @@ public:
         }
 
         // if insertion is at the tail, special case
-        if (idx == countNodes()){
+        if (idx == countNodes()) {
             insertAtTail(v);
         }
 
@@ -176,7 +174,7 @@ public:
     // this function returns true if the linked list contains a node with the value v
     // false otherwise
     bool contains(const T v) const {
-        if (head == nullptr){
+        if (head == nullptr) {
             // the list is empty, and therefore definitely does not contain the value v
             return false;
         }
@@ -184,8 +182,8 @@ public:
         ListNode<T>* current = head;
 
         // iterate through the nodes
-        while (current != nullptr){
-            if (current->val == v){
+        while (current != nullptr) {
+            if (current->val == v) {
                 return true;
             }
             current = current->nextNode;
@@ -195,19 +193,19 @@ public:
 
     // this function deletes the first instance of a value in the linked list
     // returns true if a deletion occurred, else false (the value was not found in the list)
-    bool deleteFirstInstance(const T v){
+    bool deleteFirstInstance(const T v) {
         
         // if the list is empty, we do not delete anything, hence return false
-        if (head == nullptr){
+        if (head == nullptr) {
             return false;
         }
 
         // check the case where head contains the target value
-        if (head->val == v){
+        if (head->val == v) {
             ListNode<T>* tmp = head;
             head = head->nextNode;
 
-            if (head == nullptr){
+            if (head == nullptr) {
                 // if the list becomes empty after the deletion we need to update tail to be null too
                 // otherwise tail will point to a deleted node, which causes undefined behaviour
                 tail = nullptr;
@@ -219,8 +217,8 @@ public:
 
         // traverse the list
         ListNode<T>* current = head;
-        while (current->nextNode != nullptr){
-            if (current->nextNode->val == v){
+        while (current->nextNode != nullptr) {
+            if (current->nextNode->val == v) {
                 ListNode<T>* tmp = current->nextNode;
                 current->nextNode = current->nextNode->nextNode;
 
@@ -241,8 +239,8 @@ public:
     }
 
     // this function deletes all instances of a value in the linked list
-    void deleteAllInstances(const T v){
-        while (deleteFirstInstance(v)){} // delete the first instance of v repeatedly, until it returns false
+    void deleteAllInstances(const T v) {
+        while (deleteFirstInstance(v)) {} // delete the first instance of v repeatedly, until it returns false
         // this implementation is not particularly efficient, as we traverse the list multiple times
         // this could be implemented with only one travesal of the list.
     }
@@ -253,7 +251,7 @@ public:
         ListNode<T>* current = head;
 
         // traverse the list
-        while (current != nullptr){
+        while (current != nullptr) {
             counter += current->val == v;
             current = current->nextNode;
         }
@@ -262,11 +260,11 @@ public:
     }
 
     // this function reverses the order of the linked list in-place
-    void reverse(){
+    void reverse() {
         ListNode<T>* previous = nullptr;
         ListNode<T>* current = this->head;
 
-        while (current != nullptr){
+        while (current != nullptr) {
             ListNode<T>* tmp = current->nextNode;  // save the next node
             current->nextNode = previous;       // reversal, current->next now points to its preceding node
             previous = current;                 // previous becomes current
@@ -298,5 +296,3 @@ public:
         std::swap(tail, other.tail);
     }
 };
-
-}
