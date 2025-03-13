@@ -33,10 +33,8 @@ private:
     QueueNode<T>* tail;
 
 public:
-    // Constructor
     Queue() : head(nullptr), tail(nullptr) { }
 
-    // Destructor, frees memory
     ~Queue(){
         while (head != nullptr){
             QueueNode<T>* tmp = head->next;
@@ -45,7 +43,7 @@ public:
         }
     }
 
-    // Copy constructor
+    // copy constructor
     Queue(const Queue& other) : head(nullptr), tail(nullptr) {
         QueueNode<T>* current = other.head;
         while (current != nullptr) {
@@ -54,7 +52,7 @@ public:
         }
     }
 
-    // Assignment operator
+    // assignment operator
     Queue& operator=(const Queue& other) {
         if (this != &other) {
             Queue tmp(other);
