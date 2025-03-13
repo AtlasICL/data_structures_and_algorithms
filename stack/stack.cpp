@@ -7,12 +7,12 @@ namespace atlas
 {
 
 template<typename T>
-struct Node{
+struct Node {
     T val;
     Node* next;
 
-    Node(const T& val) : val(val), next(nullptr) { }
-    Node(const T& val, Node<T>* next) : val(val), next(next) { }
+    Node(const T& val) : val(val), next(nullptr) {}
+    Node(const T& val, Node<T>* next) : val(val), next(next) {}
 
     // Explicit conversion operator to convert from QueueNode object to a string.
     // Output of type [StackItem | addr: 0xffff val: {value}].
@@ -26,12 +26,12 @@ struct Node{
 
 
 template<typename T>
-class Stack{
+class Stack {
 private:
     Node<T>* head;
 
 public:
-    Stack() : head(nullptr) { }
+    Stack() : head(nullptr) {}
     
     // the destructor frees the memory used by the stack
     ~Stack(){
@@ -43,15 +43,15 @@ public:
     }
 
     // push an element onto the stack
-    void push(const T& val){
+    void push(const T& val) {
         Node<T>* newNode = new Node<T>(val);
         newNode->next = head;
         head = newNode;
     }
 
     // remove an element from the top of the stack
-    void pop(){
-        if (this->isEmpty()){
+    void pop() {
+        if (this->isEmpty()) {
             throw std::runtime_error("Attempted to pop from empty stack");
         }
         
@@ -62,7 +62,7 @@ public:
     
     // returns the value of the top element
     T top() const {
-        if (isEmpty()){
+        if (isEmpty()) {
             throw std::runtime_error("Attempted to get top from empty stack");
         }
 
