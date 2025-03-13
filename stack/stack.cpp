@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-namespace atlas
-{
 
 template<typename T>
 struct Node {
@@ -69,10 +67,7 @@ public:
         return head->val;
     }
 
-
     bool isEmpty() const {
         return head == nullptr;
     }
 };
-
-}
