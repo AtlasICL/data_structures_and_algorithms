@@ -66,4 +66,20 @@ public:
     bool isEmpty() const {
         return head == nullptr;
     }
+
+    void print() const {
+        const Node<T>* curr = head;
+        if (head == nullptr) {
+            std::cout << "EMPTY STACK" << std::endl;
+            return;
+        }
+
+        std::cout << "STACK {\n";
+        do {
+            std::cout << "--" << static_cast<std::string>(*curr);
+            curr = curr->next;
+        } while (curr != nullptr);
+
+        std::cout << "}" << std::endl;
+    }
 };
