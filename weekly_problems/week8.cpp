@@ -18,11 +18,8 @@
 
 
 // returns true if provided array is sorted
-// @throws runtime_error if called with empty array
 bool sorted(const std::vector<int>& array) {
-    if (array.empty()) { throw std::runtime_error("called sorted() on empty array"); }
-
-    if (array.size() == 1) { return true; } 
+    if (array.empty() || array.size() == 1) { return true; } 
 
     for (int i = 0; i < array.size() - 1; i++) {
         if (array[i] > array[i+1]) { 
@@ -33,7 +30,7 @@ bool sorted(const std::vector<int>& array) {
 }
 
 
-// returns true if array[idx] < array[idx+1]
+// returns true if array[idx] <= array[idx+1]
 // if idx == array.size() - 1, returns true by default
 // @throws out_of_range error if idx < 0 or idx > array.size() - 1
 bool isOrderedAtIndex(const std::vector<int>& array, int idx) { 
@@ -73,27 +70,58 @@ void swapUntilInserted(std::vector<int>& array, int idx) {
 
 
 // implements the insertion sort algorithm
-// @throws invalid_argument if array is empty
 void insertionSort(std::vector<int>& array) {
-    if (array.empty()) { throw std::invalid_argument("Empty array"); }
+    if (array.empty()) { return; } // do nothing for an empty array
 
-    int idx = 0;
-
-    while (idx < array.size() - 1) {
+    for (int idx = 0; idx < array.size() - 1; idx++) {
         if (!isOrderedAtIndex(array, idx)) {
             swapUntilInserted(array, idx + 1);
         }
-        idx++;
     }
 }
 
 
-int main() {
-    std::vector<int> unsorted = {8, 5, 7, 2, 1, 9, 3};
-    insertionSort(unsorted);
-
-    for (const auto& e : unsorted) {
-        std::cout << e;
+// prints an std::vector
+template<typename T>
+void printVector(const std::vector<T>& array) {
+    std::cout << "[ ";
+    for (const auto& element : array) {
+        std::cout << element << " "; 
     }
+    std::cout << "]\n";
+}
+
+int main() {
+    
+    std::vector<int> a = {8, 5, 7, 2, 1, 9, 3};
+    insertionSort(a);
+
+    std::vector<int> b = {};
+    insertionSort(b);
+
+    std::vector<int> c = {0};
+    insertionSort(c);
+
+    std::vector<int> d = {0, -1};
+    insertionSort(d);
+
+    std::vector<int> e = {0, -1, 0};
+    insertionSort(e);
+
+    std::vector<int> f = {-1, -1, 0, 0, -1};
+    insertionSort(f);
+
+    std::vector<int> g = {1, 2, 3, 2, 2, 2, 5, 3, 6, 7, 9, 3, 4, 0, 1, 0, -4};
+    insertionSort(g);
+
+
+    printVector(a);
+    printVector(b);
+    printVector(c);
+    printVector(d);
+    printVector(e);
+    printVector(f);
+    printVector(g);
+
 }
 
