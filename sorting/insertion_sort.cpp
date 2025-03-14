@@ -1,5 +1,6 @@
 /**
  * An implementation of insertion sort.
+ * TODO: is only implemented for std::vector<int> - needs changing
  */
 
 #include <vector>
