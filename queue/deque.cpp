@@ -1,6 +1,5 @@
 /**
- * Dequeue (double-ended queue) implementation.
- * Dequeue, usually pronounced "deck" :)
+ * Deque (double-ended queue) implementation.
  */
 
 #include <iostream>
@@ -29,15 +28,15 @@ struct QueueNode {
 
 
 template<typename T>
-class Dequeue {
+class Deque {
 private: 
     QueueNode<T>* head;
     QueueNode<T>* tail;
 
 public:
-    Dequeue() : head(nullptr), tail(nullptr) {}
+    Deque() : head(nullptr), tail(nullptr) {}
 
-    ~Dequeue() {
+    ~Deque() {
         while (!isEmpty()) {
             popHead();
         }

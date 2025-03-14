@@ -143,15 +143,15 @@ struct QueueNode {
 
 
 template<typename T>
-class Dequeue {
+class Deque {
 private: 
     QueueNode<T>* head;
     QueueNode<T>* tail;
 
 public:
-    Dequeue() : head(nullptr), tail(nullptr) {}
+    Deque() : head(nullptr), tail(nullptr) {}
 
-    ~Dequeue() {
+    ~Deque() {
         while (!isEmpty()) {
             popHead();
         }
@@ -253,22 +253,22 @@ public:
 
 bool checkPalindrome(std::string word) {
 
-    Dequeue<char> palindromeDequeue = Dequeue<char>();
+    Deque<char> palindromeDeque = Deque<char>();
     
     for (const char c : word) {
-        palindromeDequeue.insertAtHead(c);
+        palindromeDeque.insertAtHead(c);
     }
 
     char left;
     char right;
 
-    while (palindromeDequeue.countElements() > 1) { // if odd number of letters, middle letter does not affect palindrome-ness
+    while (palindromeDeque.countElements() > 1) { // if odd number of letters, middle letter does not affect palindrome-ness
 
-        left = palindromeDequeue.getHead();
-        palindromeDequeue.popHead();
+        left = palindromeDeque.getHead();
+        palindromeDeque.popHead();
 
-        right = palindromeDequeue.getTail();
-        palindromeDequeue.popTail();
+        right = palindromeDeque.getTail();
+        palindromeDeque.popTail();
 
         if (left != right) {
             return false;
