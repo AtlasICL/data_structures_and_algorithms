@@ -6,13 +6,18 @@
 
 - ### Queues:
     - queue
-    - dequeue (double ended queue)
+    - deque (double-ended queue)
 
 - ### Stacks:
     - stack
 
 - ### Trees:
-    - binary search tree
+    - BST
+    - AVL tree
+    - red-black tree
+
+- ### Graphs:
+    - none
 
 - ### Weekly problems:
     - Completed:
