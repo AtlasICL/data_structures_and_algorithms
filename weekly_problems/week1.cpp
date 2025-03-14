@@ -1,8 +1,10 @@
 /**
  * Problem Week 1:
+ * 
  * Write a function to compute the Fibonacci sequence iteratively.
  * Write a function to compute the Fibonacci sequence recursively.
- * Then implement memoization for the recursive function.
+ * 
+ * Challenge: implement memoization for the recursive function.
  */
 
 #include <vector>

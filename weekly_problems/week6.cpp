@@ -1,7 +1,9 @@
 /**
  * Problem Week 6:
+ * 
  * Implement a singly linked list.
- * Implement reversing the linked list in place.
+ * 
+ * Challenge: implement reversing the linked list in place.
  */
 
 #include <iostream>
