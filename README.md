@@ -1,4 +1,4 @@
-# Data Structures Implemented
+# Data structures implemented
 
 - ### Linked lists:
     - singly-linked list
@@ -13,3 +13,11 @@
 
 - ### Trees:
     - binary search tree
+
+- ### Weekly problems:
+    - Completed:
+        - Week 1
+        - Week 6
+        - Week 7
+    - TODO:
+        - 2, 3, 4, 5, 8, 9, 10, 11
