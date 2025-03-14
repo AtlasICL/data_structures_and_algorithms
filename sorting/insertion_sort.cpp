@@ -7,11 +7,8 @@
 #include <stdexcept>
 
 // returns true if provided array is sorted
-// @throws runtime_error if called with empty array
 bool sorted(const std::vector<int>& array) {
-    if (array.empty()) { throw std::runtime_error("called sorted() on empty array"); }
-
-    if (array.size() == 1) { return true; } 
+    if (array.empty() || array.size() == 1) { return true; } 
 
     for (int i = 0; i < array.size() - 1; i++) {
         if (array[i] > array[i+1]) { 
@@ -22,7 +19,7 @@ bool sorted(const std::vector<int>& array) {
 }
 
 
-// returns true if array[idx] < array[idx+1]
+// returns true if array[idx] <= array[idx+1]
 // if idx == array.size() - 1, returns true by default
 // @throws out_of_range error if idx < 0 or idx > array.size() - 1
 bool isOrderedAtIndex(const std::vector<int>& array, int idx) { 
@@ -62,16 +59,12 @@ void swapUntilInserted(std::vector<int>& array, int idx) {
 
 
 // implements the insertion sort algorithm
-// @throws invalid_argument if array is empty
 void insertionSort(std::vector<int>& array) {
-    if (array.empty()) { throw std::invalid_argument("Empty array"); }
+    if (array.empty()) { return; } // do nothing for an empty array
 
-    int idx = 0;
-
-    while (idx < array.size() - 1) {
+    for (int idx = 0; idx < array.size() - 1; idx++) {
         if (!isOrderedAtIndex(array, idx)) {
             swapUntilInserted(array, idx + 1);
         }
-        idx++;
     }
 }
