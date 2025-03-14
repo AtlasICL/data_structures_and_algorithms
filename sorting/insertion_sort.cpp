@@ -48,11 +48,9 @@ class InsertionSorter {
 
 
     static void swapUntilInserted(std::vector<T>& array, int idx) {
-
         if (isOrderedAtIndex(array, idx - 1)) {
             return;
         }
-
         int i = idx;
         do {
             switchElements(array, i);
