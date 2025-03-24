@@ -60,7 +60,7 @@ class InsertionSorter {
 
 public:
     // implements the insertion sort algorithm
-    static void insertionSort(std::vector<T>& array) {
+    static void sort(std::vector<T>& array) {
         if (array.empty()) { return; } // do nothing for an empty array
 
         for (int idx = 0; idx < array.size() - 1; idx++) {
