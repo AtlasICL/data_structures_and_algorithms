@@ -19,10 +19,20 @@
 - ### Graphs:
     - none
 
-- ### Weekly problems:
-    - Completed:
-        - Week 1
-        - Week 6
-        - Week 7
-    - TODO:
-        - 2, 3, 4, 5, 8, 9, 10, 11
+---
+
+# Weekly problems:
+
+- [x] Week 1
+- [ ] Week 2
+- [ ] Week 3
+- [ ] Week 4
+- [ ] Week 5
+- [x] Week 6
+- [x] Week 7
+- [x] Week 8
+- [ ] Week 9
+- [ ] Week 10
+- [ ] Week 11
+
+
