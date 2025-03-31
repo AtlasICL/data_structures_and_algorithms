@@ -1,3 +1,10 @@
+/**
+ * Week 3 Problem:
+ * 
+ * Write a function to compute the number of comparisons in
+ * bubble sort for a given array size.
+ */
+
 #include <vector>
 #include <stdexcept>
 #include <iostream>
