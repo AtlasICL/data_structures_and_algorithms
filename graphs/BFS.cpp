@@ -1,7 +1,7 @@
 /**
  * Implementation of BFS (breadth-first search).
  * In this case, the BFS algorithm operates on an unweighted, undirected graph.
- * However it would work identically for a directed graph.
+ * However the BFS function would be identical for a directed graph.
  */
 
 #include <vector>
