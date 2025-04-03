@@ -4,6 +4,17 @@
 #include <string>
 #include <sstream>
 #include <stdexcept>
+#include <queue>
+
+// helper function to print a vector
+template<typename T>
+void printVector(const std::vector<T>& vec) {
+    std::cout << "[";
+    for (size_t i = 0; i < vec.size() - 1; i++) {
+        std::cout << vec[i] << ", ";
+    }
+    std::cout << vec[vec.size()-1] << "]" << std::endl;
+}
 
 class DirectedGraph {
     private:
@@ -35,6 +46,43 @@ public:
             std::cout << "\n";
         }
         std::cout << "--------------------------" << std::endl;
+    }
+
+    // breadth first traversal of the graph
+    void breadth_first_traversal(int starting_idx) const {
+
+        std::cout << "Starting B-F traversal from index " << starting_idx << std::endl; 
+
+        if (starting_idx < 0 || starting_idx >= V) {
+            throw std::invalid_argument("Invalid starting index for BFT");
+        }
+
+        std::queue<int> search_queue; // queue of nodes to search
+        std::vector<bool> visited(V, false); // vector to keep track of which nodes have been visited
+        // we initialise it to have V elements, and each element is initially set to value false
+
+        visited[starting_idx] = true;
+        search_queue.push(starting_idx);
+
+        std::vector<int> visited_nodes = {}; // this is just to visualise the order in which we visited the nodes
+
+        while (!search_queue.empty()) {
+            const int& current_node = search_queue.front();
+            search_queue.pop();
+
+            visited_nodes.push_back(current_node); // helper
+
+            // enqueue the neighbours of our current node (unless they have already been visited)
+            for (const int& neighbour : adj[current_node]) {
+                if (visited[neighbour] == false) {
+                    search_queue.push(neighbour);
+                    visited[neighbour] = true; // once the neighbour node is "seen" it is considered visited
+                }
+            }
+        }
+
+        std::cout << "Nodes visited during BFT : \n";
+        printVector(visited_nodes);
     }
 };
 
