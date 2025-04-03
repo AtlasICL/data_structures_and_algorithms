@@ -1,3 +1,8 @@
+/**
+ * Implementation of an unewighted, directed graph
+ * using an adjacency list.
+ */
+
 #include <vector>
 #include <list>
 #include <iostream>

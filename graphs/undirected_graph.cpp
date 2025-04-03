@@ -1,5 +1,6 @@
 /**
- * Implementation of an undirected graph.
+ * Implementation of an unweighted, undirected graph,
+ * using an adjacency list.
  */
 
 #include <vector>
