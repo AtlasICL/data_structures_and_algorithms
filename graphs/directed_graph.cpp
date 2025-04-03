@@ -5,6 +5,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <queue>
+#include <algorithm>
 
 // helper function to print a vector
 template<typename T>
@@ -83,6 +84,61 @@ public:
 
         std::cout << "Nodes visited during BFT : \n";
         printVector(visited_nodes);
+    }
+
+    // breadth-first search to find the shortest path between 2 nodes in the graph
+    // @returns a vector with the path between the 2 nodes, or an empty vector if no path exists
+    // @throws invalid_argument if starting node or target node are invalid
+    std::vector<int> breadth_first_search(int starting_node, int target_node) const {
+
+        // validate starting node
+        if (starting_node < 0 || starting_node >= V) { 
+            throw std::invalid_argument("Invalid index for starting node");
+        }
+
+        // validate target node
+        if (target_node < 0 || target_node >= V) {
+            throw std::invalid_argument("Invalid index for target node");
+        }
+
+        std::queue<int> search_queue; // queue of nodes to search
+        std::vector<bool> visited(V, false); // vector to keep track of which nodes have been visited
+        // we initialise it to have V elements, and each element is initially set to value false
+
+        std::vector<int> parent(V, -1); // used to keep track of predecessor (parent) of each node during BFS
+        // a parent will be set for each node when the node is discovered
+        // all elements initialised to -1 until they have been visited
+
+        visited[starting_node] = true;
+        search_queue.push(starting_node);
+
+        while (!search_queue.empty()) {
+            const int& current_node = search_queue.front();
+            search_queue.pop();
+
+            // check if we've reached the target
+            if (current_node == target_node) {
+                break;
+            }
+
+            for (const int& neighbour : adj[current_node]) {
+                if (visited[neighbour] == false) {
+                    visited[neighbour] = true;
+                    parent[neighbour] = current_node;
+                    search_queue.push(neighbour);
+                }
+            }
+
+            // if the target was never visited, it must be unreachable from the starting node
+            if (visited[target_node] == false) {
+                return {};
+            }
+
+            // reconstruct the path from target to start using parents
+            
+
+        }
+
     }
 };
 
