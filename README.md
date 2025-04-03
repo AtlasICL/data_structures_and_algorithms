@@ -19,6 +19,7 @@
 ### Graphs:
 - directed graph
 - undirected graph
+- weighted undirected graph
 
 ---
 
@@ -28,8 +29,9 @@
 - Bubble sort
 - Insertion sort
 
-### Graph traversal algorithms
+### Graph algorithms
 - Breadth-first search
+- Kruskal's algorithm (to find MST)
 
 
 ---
