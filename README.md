@@ -1,4 +1,4 @@
-# Data structures implemented
+# Data structures implemented:
 
 ### Linked lists:
 - singly-linked list
