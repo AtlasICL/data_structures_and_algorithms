@@ -30,8 +30,8 @@
 - Insertion sort
 
 ### Graph algorithms
-- Breadth-first search
-- Kruskal's algorithm (to find MST)
+- BFS
+- Kruskal's algorithm (to find MST / MSF)
 
 
 ---
