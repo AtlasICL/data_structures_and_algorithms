@@ -28,10 +28,11 @@ public:
         adj[v].push_back(u);
     }
 
+    // displays the node count and the adjacency list (neighbours) of each node
     void printGraph() const {
         std::cout << "**** UNDIRECTED GRAPH ****" << std::endl;
         std::cout << "---- Vertex count = " << V << " ----" << std::endl;
-        for (int i = 0; i < V; ++i) {
+        for (int i = 0; i < V; i++) {
             std::cout << "| " << i << ": ";
             for (const auto& neighbor : adj[i]) {
                 std::cout << neighbor << " ";
