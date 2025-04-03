@@ -12,13 +12,25 @@
 - stack
 
 ### Trees:
-- BST
-- AVL tree
-- red-black tree
+- BST (WIP)
+- AVL tree (WIP)
+- red-black tree (WIP)
 
 ### Graphs:
 - directed graph
 - undirected graph
+
+---
+
+# Algorithms implemented 
+
+### Sorting algorithms
+- Bubble sort
+- Insertion sort
+
+### Graph traversal algorithms
+- Breadth-first search
+
 
 ---
 
@@ -28,7 +40,7 @@
 - [x] Week 2
 - [x] Week 3
 - [ ] Week 4
-- [ ] Week 5
+- [ ] Week 5 (WIP)
 - [x] Week 6
 - [x] Week 7
 - [x] Week 8
