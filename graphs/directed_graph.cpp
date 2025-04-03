@@ -4,13 +4,9 @@
  */
 
 #include <vector>
-#include <list>
 #include <iostream>
 #include <string>
-#include <sstream>
 #include <stdexcept>
-#include <queue>
-#include <algorithm>
 
 // helper function to print a vector
 template<typename T>
