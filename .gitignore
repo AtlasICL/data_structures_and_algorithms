@@ -7,5 +7,6 @@
 # Unignore any file that has an extension (recursively)
 !**/*.*
 
+# Also ignore any other unnecessary files
 .vscode
 *.out
