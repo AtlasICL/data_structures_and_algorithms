@@ -1,5 +1,5 @@
 /**
- * Implementation of an unweighted, undirected graph.
+ * Implementation of a weighted, undirected graph.
  */
 
 /**
@@ -105,13 +105,36 @@ public:
             // we check this using UnionFind
             if (uf.unionSets(edge.u, edge.v) == true) {
                 mst.push_back(edge);
-                // if we have V-1 edges, the MST is complete (property of trees)
+                // if we have V-1 edges, the MST is complete (property of trees) IF GRAPH IS CONNECTED!
                 if (mst.size() == V - 1) {
                     break;
                 }
             }
         }
         return mst;
+    }
+
+    // Kruskal's algorithm to compute the MSF (Minimum Spanning Forest)
+    // @returns the MSF as an std::vector<Edge>
+    // @attention This version accomodates graphs which are not connected
+    std::vector<Edge> kruskalMSF() {
+        std::vector<Edge> msf; // vector which stores the edges which comprise the MSF
+
+        // sort the edges of the graph by ascending weight (using a lambda to compare weights)
+        std::sort(edges.begin(), edges.end(), [](const Edge &a, const Edge &b){return a.weight < b.weight;});
+
+        // initialise a UnionFind class for V vertices 
+        UnionFind uf(V);
+
+        // process edges in sorted order
+        for (const auto& edge : edges) {
+            // only add the edge to the MSF if it does not create a cycle
+            // we check this using UnionFind
+            if (uf.unionSets(edge.u, edge.v) == true) {
+                msf.push_back(edge);
+            }
+        }
+        return msf;
     }
 };
 
