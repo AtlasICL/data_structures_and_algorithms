@@ -1,5 +1,5 @@
 /**
- * Implementation of an unewighted, directed graph
+ * Implementation of an unweighted, directed graph
  * using an adjacency list.
  */
 
