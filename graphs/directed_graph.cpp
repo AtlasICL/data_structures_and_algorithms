@@ -128,17 +128,23 @@ public:
                     search_queue.push(neighbour);
                 }
             }
-
-            // if the target was never visited, it must be unreachable from the starting node
-            if (visited[target_node] == false) {
-                return {};
-            }
-
-            // reconstruct the path from target to start using parents
-            
-
         }
 
+        // if the target was never visited, it must be unreachable from the starting node
+        if (visited[target_node] == false) {
+            return {};
+        }
+
+        // reconstruct the path from target to start using parents
+        // we start from the target, and go upwards (to the parent each time)
+        std::vector<int> path;
+        for (int curr_node = target_node; curr_node != -1; curr_node = parent[curr_node]) {
+            path.push_back(curr_node);
+        }
+        // since we built the path by going from the *target* to the *starting node*, we reverse the path before returning it
+        std::reverse(path.begin(), path.end());
+
+        return path;
     }
 };
 
