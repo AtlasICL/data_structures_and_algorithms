@@ -43,9 +43,9 @@
 - [ ] Week 5 (WIP)
 - [x] Week 6
 - [x] Week 7
-- [x] Week 8
+- [x] Week 8 (TODO: Challenge)
 - [ ] Week 9
-- [ ] Week 10
+- [x] Week 10 (TODO: Challenge)
 - [ ] Week 11
 
 
