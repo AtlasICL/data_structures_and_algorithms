@@ -1,6 +1,7 @@
 /**
  * Implementation of Prim's algorithm for finding
  * the MST of a weighted undirected graph.
+ * -- INCOMPLETE --
  */
 
 #include <vector>
