@@ -35,4 +35,7 @@ public:
 
     // finds the MST of the graph using Prim's algorithm
 
+    // TODO: actually do the work
+
+    // apparently Prim's works best with an adjacency list
 };
