@@ -8,20 +8,6 @@
 #include <string>
 #include <stdexcept>
 
-// helper function to print a vector
-template<typename T>
-void printVector(const std::vector<T>& vec) {
-    std::cout << "[";
-    if (vec.empty()) {
-        std::cout << "]" << std::endl;
-        return;
-    }
-    for (size_t i = 0; i < vec.size() - 1; i++) {
-        std::cout << vec[i] << ", ";
-    }
-    std::cout << vec[vec.size()-1] << "]" << std::endl;
-}
-
 class DirectedGraph {
     private:
     int V; // number of vertices
