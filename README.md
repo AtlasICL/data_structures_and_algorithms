@@ -1,4 +1,6 @@
-# Data structures implemented:
+# Some of my work for the module ECM1414 - Data Structures and Algorithms
+
+## 1) Data structures implemented:
 
 ### Queues:
 - queue
@@ -27,7 +29,7 @@
 
 ---
 
-# Algorithms implemented 
+## Algorithms implemented 
 
 ### Sorting algorithms
 - Bubble sort
@@ -41,7 +43,7 @@
 
 ---
 
-# Weekly problems:
+## Workshop suggested programs:
 
 - [x] Week 1
 - [x] Week 2
