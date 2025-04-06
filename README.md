@@ -56,7 +56,7 @@
 - [x] Week 6
 - [x] Week 7
 - [x] Week 8 (TODO: Challenge)
-- [ ] Week 9
+- [x] Week 9
 - [x] Week 10 (TODO: Challenge)
 - [ ] Week 11
 
