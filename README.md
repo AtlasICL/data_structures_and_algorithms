@@ -7,7 +7,7 @@
 - deque (double-ended queue)
 
 ### Trees
-- BST (WIP)
+- BST
 - AVL tree (WIP)
 - red-black tree (WIP)
 
