@@ -82,6 +82,16 @@ private:
         updateHeight(node); // to ensure we have up-to-date height
         int bf = balanceFactor(node);
 
+        // left-heavy case
+        if (bf > 1) {
+            ...
+        }
+
+        // right-heavy case
+        if (bf < 1) {
+            ...
+        }
+
     }
 
     // helper function for insertion
