@@ -2,28 +2,28 @@
 
 ## 1) Data structures implemented:
 
-**Queues**
+### Queues
 - queue
 - deque (double-ended queue)
 
-**Trees**
+### Trees
 - BST (WIP)
 - AVL tree (WIP)
 - red-black tree (WIP)
 
-**Graphs**
+### Graphs
 - directed graph
 - undirected graph
 - weighted undirected graph
 
-**Linked lists**
+### Linked lists
 - singly-linked list
 - Josephus election (circular linked list)
 
-**Stacks**
+### Stacks
 - stack
 
-**Arrays**
+### Arrays
 - dynamic array
 
 
@@ -31,11 +31,11 @@
 
 ## Algorithms implemented 
 
-**Sorting algorithms**
+### Sorting algorithms
 - Bubble sort
 - Insertion sort
 
-**Graph algorithms**
+### Graph algorithms
 - Breadth-first search
 - Depth-first search
 - Kruskal's algorithm (to find MST / MSF)
