@@ -84,14 +84,23 @@ private:
 
         // left-heavy case
         if (bf > 1) {
-            ...
+            // if "zig-zag" case, we need to transform into "linear" case
+            if (balanceFactor(node->left) < 0) {
+                node->left = leftRotate(node->left); // transform into linear case
+            }
+            return rightRotate(node);
         }
 
         // right-heavy case
         if (bf < 1) {
-            ...
+            // if "zig-zag" case, we transform into linear case
+            if (balanceFactor(node->right) > 0) {
+                node->right = rightRotate(node->right);
+            }
+            return rightRotate(node);
         }
 
+        return node;
     }
 
     // helper function for insertion
