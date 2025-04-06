@@ -40,6 +40,9 @@
 - Depth-first search
 - Kruskal's algorithm (to find MST / MSF)
 
+### Tree algorithms
+- in-order depth-first search
+- pre-order depth-first search
 
 ---
 
