@@ -1,15 +1,8 @@
 # Data structures implemented:
 
-### Linked lists:
-- singly-linked list
-- Josephus election (circular linked list)
-
 ### Queues:
 - queue
 - deque (double-ended queue)
-
-### Stacks:
-- stack
 
 ### Trees:
 - BST (WIP)
@@ -21,6 +14,17 @@
 - undirected graph
 - weighted undirected graph
 
+### Linked lists:
+- singly-linked list
+- Josephus election (circular linked list)
+
+### Stacks:
+- stack
+
+### Arrays:
+- dynamic array
+
+
 ---
 
 # Algorithms implemented 
@@ -30,7 +34,8 @@
 - Insertion sort
 
 ### Graph algorithms
-- BFS
+- Breadth-first search
+- Depth-first search
 - Kruskal's algorithm (to find MST / MSF)
 
 
