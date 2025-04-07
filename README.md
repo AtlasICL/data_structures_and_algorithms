@@ -8,7 +8,7 @@
 
 ### Trees
 - BST
-- AVL tree (WIP)
+- AVL tree
 - red-black tree (WIP)
 
 ### Graphs
