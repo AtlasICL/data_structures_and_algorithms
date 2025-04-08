@@ -1,5 +1,13 @@
 # Some of my work for the module ECM1414 - Data Structures and Algorithms
-I decided to write this in C++ to get a deeper low-level understanding of how these ADSs work.
+
+- Data structures / algorithms implemented
+  - [Trees](#trees)
+  - [Graphs](#graphs)
+  - [Queues](#queues)
+  - [Arrays](#arrays)
+  - [Linked lists](#linked-lists)
+  - [Stacks](#stacks)
+- [Workshop suggested programs:](#workshop-suggested-programs)
 
 ---
 
@@ -48,6 +56,8 @@ I decided to write this in C++ to get a deeper low-level understanding of how th
 
 
 # Workshop suggested programs:
+
+The problem sheet is located [here](weekly_problems/weekly_problems.pdf).
 
 - [x] Week 1
 - [x] Week 2
