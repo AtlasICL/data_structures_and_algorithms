@@ -77,4 +77,30 @@ public:
         return m_data[y][x];
     }
 
+    void printRow(size_t y) const {
+        if (m_data[y].size() == 0) {
+            std::cout << "[]" << std::endl;
+            return;
+        }
+        std::cout << "[";
+        for (size_t x = 0 ; x < m_data[y].size() - 1 ; x++) {
+            std::cout << m_data[y][x] << ", ";
+        }
+        std::cout << m_data[y][m_data[y].size()-1] << "]" << std::endl;
+    }
+
+    void print() const {
+        std::cout << "**MATRIX** \n";
+        for (size_t y = 0 ; y < rows() ; y++) {
+            printRow(y);
+        }
+    }
+
 };
+
+
+int main() {
+    Matrix<int> m(5, 3, 2);
+
+    m.print();
+}
