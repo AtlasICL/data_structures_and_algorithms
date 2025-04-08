@@ -20,7 +20,7 @@ def search_and_count(array: list[int], n: int) -> int:
     return -1
 
 
-def week2_problem():
+def main():
     for num in numbers_to_search_for:
         print(f"-- Searching for {num} --")
         ops: int = search_and_count(array_to_search, num)
