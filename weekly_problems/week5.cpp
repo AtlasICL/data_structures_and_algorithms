@@ -15,7 +15,6 @@
 #include <sstream>
 #include <stdexcept>
 
-
 // rotates the vector right by k positions, returns a new (rotated) vector
 // @throws invalid_argument if vector is empty or k is negative
 template<typename T>
