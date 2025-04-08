@@ -53,7 +53,7 @@
 - [x] Week 1
 - [x] Week 2
 - [x] Week 3
-- [ ] Week 4
+- [x] Week 4 (TODO: Challenge)
 - [ ] Week 5 (WIP)
 - [x] Week 6
 - [x] Week 7
