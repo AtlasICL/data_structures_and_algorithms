@@ -19,29 +19,29 @@ I decided to write this in C++ to get a deeper low-level understanding of how th
 
 ## Queues
 
-| Data structure | Queue                                                                                                                                                                             | Deque (double-ended queue)                                                                                                   |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Data structure | Queue                                                                                                                                                                                           | Deque (double-ended queue)                                                                                                                     |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | Features       | - queue template class, implement using linked list structure <br> - destructor to free memory; copy constructor for deep copy; assignment operator <br> - methods for enqueue, dequeue and top | - deque template class with same features <br> - insertion at head and tail <br> - methods for getHead and getTail <br> - pop at head and tail |
 
 ## Arrays 
 
-| Data structure | Dynamic array | std::vector 
-| -------------- | --- | ---
-| Features       | - dynamically allocated array using contiguous memory <br> - constructors: overloads for constructing array at a given size, and with specific default values <br> destructor to free memory, copy constructor for deep copy, assignment operator <br> - string conversion operator for printing <br> - checking if the array contains a value / find first occurrence / find all occurrences <br> - method for appending (push_back) <br> - deletion of first or all instances of a given value <br> - deletion at a specific index | (Standard template library implementation)
-| Algorithms     | | - bubble sort <br> - insertion sort
+| Data structure | Dynamic array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | std::vector                                |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ |
+| Features       | - dynamically allocated array using contiguous memory <br> - constructors: overloads for constructing array at a given size, and with specific default values <br> destructor to free memory, copy constructor for deep copy, assignment operator <br> - string conversion operator for printing <br> - checking if the array contains a value / find first occurrence / find all occurrences <br> - method for appending (push_back) <br> - deletion of first or all instances of a given value <br> - deletion at a specific index | (Standard template library implementation) |
+| Algorithms     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | - bubble sort <br> - insertion sort        |
 
 ## Linked lists
 
-| Data structure | Linked list | Circular linked list
-| -------------- | --- | ---
-| Features       | - linked list template class <br> - constructor overload for creating a linked list from a vector <br> - destructor to free memory; copy constructor for deep copy; assignment operator <br> - insertion at head, tail, and a specific index <br> - deleting first / all ocurrences of an element <br> - counting instances / counting nodes <br> - printing 
-| Algorithms     | reversal in-place | Josephus election (with optional offset)
+| Data structure | Linked list                                                                                                                                                                                                                                                                                                                                                  | Circular linked list                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
+| Features       | - linked list template class <br> - constructor overload for creating a linked list from a vector <br> - destructor to free memory; copy constructor for deep copy; assignment operator <br> - insertion at head, tail, and a specific index <br> - deleting first / all ocurrences of an element <br> - counting instances / counting nodes <br> - printing |
+| Algorithms     | reversal in-place                                                                                                                                                                                                                                                                                                                                            | Josephus election (with optional offset) |
 
 ## Stacks
 
-| Data structure | Stack
-| -------------- | ---
-| Features       | - push <br> - pop <br> - top
+| Data structure | Stack                        |
+| -------------- | ---------------------------- |
+| Features       | - push <br> - pop <br> - top |
 
 
 ---
