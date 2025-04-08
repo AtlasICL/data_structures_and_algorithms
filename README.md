@@ -2,49 +2,23 @@
 
 ---
 
-## 1) Data structures implemented:
+## Data structures implemented:
 
-### Queues
-- queue
-- deque (double-ended queue)
-
-### Trees
-- BST
-- AVL tree
-- red-black tree (WIP)
-
-### Graphs
-- directed graph
-- undirected graph
-- weighted undirected graph
-
-### Linked lists
-- singly-linked list
-- Josephus election (circular linked list)
-
-### Stacks
-- stack
-
-### Arrays
-- dynamic array
-
+| Trees                | Queues                     | Graphs           | Linked Lists                     | Stacks | Arrays        |
+| -------------------- | -------------------------- | ---------------- | -------------------------------- | ------ | ------------- |
+| Binary Search Tree   | Queue                      | Directed graph   | Linked list                      | Stack  | Dynamic array |
+| AVL Tree             | Deque (double-ended queue) | Undirected graph | Circular linked list (/Josephus) |
+| Red-black tree (WIP) |                            | Weighted graph   |                                  |        |
 
 ---
 
 ## Algorithms implemented 
 
-### Sorting algorithms
-- Bubble sort
-- Insertion sort
-
-### Graph algorithms
-- Breadth-first search
-- Depth-first search
-- Kruskal's algorithm (to find MST / MSF)
-
-### Tree algorithms
-- in-order depth-first search
-- pre-order depth-first search
+| Arrays         | Graphs               | Trees |
+| -------------- | -------------------- | ----- |
+| Bubble sort    | Breadth-first search | In-order traversal
+| Insertion sort | Depth-first search   | Pre-order traversal
+|                | Kruskal's algorithm  | 
 
 ---
 
