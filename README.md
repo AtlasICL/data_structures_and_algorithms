@@ -1,5 +1,7 @@
 # Some of my work for the module ECM1414 - Data Structures and Algorithms
 
+---
+
 ## 1) Data structures implemented:
 
 ### Queues
