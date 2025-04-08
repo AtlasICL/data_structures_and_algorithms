@@ -86,7 +86,7 @@ public:
         for (size_t x = 0 ; x < m_data[y].size() - 1 ; x++) {
             std::cout << m_data[y][x] << ", ";
         }
-        std::cout << m_data[y][m_data[y].size()-1] << "]" << std::endl;
+        std::cout << m_data[y][maxCol()] << "]" << std::endl;
     }
 
     void print() const {
