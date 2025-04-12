@@ -1,13 +1,13 @@
 # Some of my work for the module ECM1414 - Data Structures and Algorithms
 
-- **Data structures / algorithms implemented:**
+- ### Data structures / algorithms implemented
   - [Trees](#trees)
   - [Graphs](#graphs)
   - [Queues](#queues)
   - [Arrays](#arrays)
   - [Linked lists](#linked-lists)
   - [Stacks](#stacks)
-- [Workshop suggested programs](#workshop-suggested-programs)
+- ### [Workshop suggested programs](#workshop-suggested-programs)
 
 ---
 
@@ -47,9 +47,9 @@
 
 ## Stacks
 
-| Data structure | Stack                        |
-| -------------- | ---------------------------- |
-| **Features**   | - push <br> - pop <br> - top |
+| Data structure | Stack                                                       |
+| -------------- | ----------------------------------------------------------- |
+| **Features**   | - stack template class <br> - methods for push, pop and top |
 
 
 ---
