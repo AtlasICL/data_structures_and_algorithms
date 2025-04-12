@@ -78,15 +78,13 @@ public:
         if (u == v) {
             return 0;
         }
-        if (edgeConnects(u, v)) {
-            for (const Edge& edge : edges) {
-                if (edge.u == u && edge.v == v || edge.u == v && edge.v == u) {
-                    return edge.weight;
-                }
-            }
-        }
-        else {
+        if (!edgeConnects(u, v)) {
             return INF;
+        }
+        for (const Edge& edge : edges) {
+            if (edge.u == u && edge.v == v || edge.u == v && edge.v == u) {
+                return edge.weight;
+            }
         }
     }
 
