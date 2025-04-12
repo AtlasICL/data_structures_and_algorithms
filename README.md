@@ -69,6 +69,5 @@ The **problem sheet** is located [here](weekly_problems/weekly_problems.pdf).
 - [x] Week 8 TODO: Challenge (hybrid sorting)
 - [x] Week 9
 - [x] Week 10 TODO: Challenge (comparison with Prim's algorithm)
-- [ ] Week 11
-
+- [ ] Week 11 (Challenge complete; TODO: Prim's algorithm)
 
