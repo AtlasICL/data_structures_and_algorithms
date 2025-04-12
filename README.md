@@ -7,7 +7,7 @@
   - [Arrays](#arrays)
   - [Linked lists](#linked-lists)
   - [Stacks](#stacks)
-- ### [Workshop suggested programs](#workshop-suggested-programs)
+- ### [Workshop suggested programs](#workshop-suggested-programs-1)
 
 ---
 
