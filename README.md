@@ -20,10 +20,10 @@
 
 ## Graphs 
 
-| Data structure | Directed graph                                   | Undirected graph                                 | Weighted undirected graph                                                          |
-| -------------- | ------------------------------------------------ | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| **Features**   | - directed graph using an adjacency list         | - undirected graph using an adjacency list       | - weighted undirected graph using a `struct Edge` and an `std::vector<Edge> edges` |
-| **Algorithms** | - Depth-first search <br> - Breadth-first search | - Depth-first search <br> - Breadth-first search | - Kruskal's algorithm, for finding MST or MSF                                      |
+| Data structure | Directed graph                                   | Undirected graph                                 | Weighted undirected graph                                                           |
+| -------------- | ------------------------------------------------ | ------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **Features**   | - directed graph using an adjacency list         | - undirected graph using an adjacency list       | - weighted undirected graph using an adjacency list (of Edge structs with a weight) |
+| **Algorithms** | - depth-first search <br> - breadth-first search | - depth-first search <br> - breadth-first search | - Kruskal's algorithm, for finding MST or MSF                                       |
 
 ## Queues
 
