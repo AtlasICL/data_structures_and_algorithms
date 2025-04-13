@@ -1,6 +1,5 @@
 /**
- * Implementation of the Floyd-Warshall algorithm for
- * finding the shortest path between all pairs of nodes
+ * Algorithm for finding the shortest path between a pair of nodes
  * in a weighted graph.
  */
 
