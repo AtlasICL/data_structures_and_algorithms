@@ -42,7 +42,7 @@ private:
             return true;
         }
         for (const Edge& edge : edges) {
-            if (edge.u == u && edge.v == v || edge.u == v && edge.v == u) {
+            if ((edge.u == u && edge.v == v) || (edge.u == v && edge.v == u)) {
                 return true;
             }
         }
