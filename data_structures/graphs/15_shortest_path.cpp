@@ -190,5 +190,25 @@ public:
         return path;
     }
 
+    // Also returns the shortest path between nodes source and destination.
+    // If u and v are the same node, will return an empty vector.
+    // If no path exists between source and destination, throws a runtime error.
+    // ! This implementation of the function uses the next (look-forward) setup
+    // instead of the parent setup. 
+    // This isn't strictly necessary, I just wanted to write the function both ways
+    // to get a deeper understanding.
+    std::vector<int> shortestPathAlt(int source, int destination) const {
+        if (!isValidVertex(source, destination)) {
+            throw std::runtime_error("Invalid vertices for shortest path.");
+        }
+
+        if (source == destination) {
+            return {};
+        }
+
+        std::vector<std::vector<int>> dist(V, std::vector<int>(V, INF)); // V*V matrix with default value INF
+        std::vector<std::vector<int>> next(V, std::vector<int>(V, -1)); // V*V matrix with default value -1
+
+    }
 };
 
