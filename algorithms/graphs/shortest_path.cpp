@@ -208,6 +208,50 @@ public:
         std::vector<std::vector<int>> dist(V, std::vector<int>(V, INF)); // V*V matrix with default value INF
         std::vector<std::vector<int>> next(V, std::vector<int>(V, -1)); // V*V matrix with default value -1
 
+        for (int i = 0 ; i < V ; i++) {
+            for (int j = 0 ; j < V ; j++) {
+                if (i == j) {
+                    dist[i][j] = 0;
+                    next[i][j] = i;
+                }
+                else if (edgeConnects(i, j)) {
+                    dist[i][j] = edgeWeight(i, j);
+                    next[i][j] = j;
+                }
+                else {
+                    dist[i][j] = INF; // redundant since dist matrix is initialised to INF
+                    next[i][j] = -1; // redundant since next matrix is initialised to -1
+                }
+            }
+        }
+
+        // consider intermediate nodes
+        for (int k = 0 ; k < V ; k++) {
+            for (int i = 0 ; i < V ; i++) {
+                for (int j = 0 ; j < V ; j++) {
+                    if (dist[i][k] < INF && dist[k][j] < INF &&
+                        dist[i][k] + dist[k][j] < dist[i][j]) {
+                            dist[i][j] = dist[i][k] + dist[k][j];
+                            next[i][j] = next[i][k];
+                        }
+                }
+            }
+        }
+
+        // prepare for returning
+        if (next[source][destination] == -1) {
+            // no path exists from source to destination
+            throw std::runtime_error("No path exists from source to destination");
+        }
+
+        // reconstruct the path
+        std::vector<int> path;
+        for (int curr = source ; curr != destination ; curr = next[curr][destination]) {
+            path.push_back(curr);
+        }
+        path.push_back(destination); // include the destination in the path
+        
+        return path;
     }
 };
 
