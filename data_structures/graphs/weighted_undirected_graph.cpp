@@ -25,7 +25,7 @@ struct Edge {
 class WeightedUndirectedGraph {
 private:
     int m_V; // node count
-    std::vector<Edge> m_edges; // adjacency list
+    std::vector<Edge> m_edges; // edge list
 
     // @returns Returns true if u is a valid node in the graph.
     bool isValidNode(int u) const noexcept {
@@ -101,6 +101,8 @@ public:
             m_edges.erase(it);
             return;
         }
+        // NOTE: The std::find which searched for the edge implicity also searches for {v, u} edge (as well as {u, v}). 
+        // See the == operator overload in Edge struct.
     }
 
     // @returns Updates the weight of the edge directly connecting nodes u and v.
@@ -118,12 +120,3 @@ public:
         m_edges.push_back(Edge{u, v, newWeight}); // add an edge with the new weight
     }
 };
-
-
-int main() {
-
-    WeightedUndirectedGraph g(5);
-
-
-
-}
