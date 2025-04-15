@@ -22,7 +22,6 @@ std::string rodToStr(Rod rod) {
     }
 }
 
-
 class HanoiSolver {
 public:
     void solve(int num_disks, Rod source, Rod aux, Rod target) {
