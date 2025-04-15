@@ -2,6 +2,7 @@
  * Implementation of a weighted undirected graph.
  */
 
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include <stdexcept>
@@ -69,6 +70,25 @@ private:
         throw std::runtime_error("Given edge does not exist");
     }
 
+    // @returns Returns the neighbourhood of the given node.
+    // @returns Returns an empty vector if the node has no neighbours.
+    // @throws Raises an invalid argument exception if u is not a valid node.
+    std::vector<int> getNeighbourhood(int u) const {
+        if (!isValidNode(u)) {
+            throw std::invalid_argument("Invalid node in getNeighbourhood");
+        }
+        std::vector<int> neighbours = {};
+        for (const Edge& edge : m_edges) {
+            if (edge.u == u) {
+                neighbours.push_back(edge.v);
+            }
+            if (edge.v == u) {
+                neighbours.push_back(edge.u);
+            }
+        }
+        return neighbours;
+    }
+
 public:
     explicit WeightedUndirectedGraph(int V) : m_V(V), m_edges({}) {}
 
@@ -118,5 +138,17 @@ public:
         }
         removeEdge(u, v); // delete the pre-existing edge
         m_edges.push_back(Edge{u, v, newWeight}); // add an edge with the new weight
+    }
+
+    // Prints the graph, displaying the nodes that each node is connected to.
+    void print() const {
+        std::cout << "**** Undirected weighted graph on " << m_V << " nodes ****\n";
+        for (int u = 0 ; u < m_V ; u++) {
+            std::cout << " ~" << u << " -> ";
+            for (int neighbour = 0; neighbour < getNeighbourhood(u).size(); neighbour++) {
+                std::cout << getNeighbourhood(u)[neighbour] << " ";
+            }
+            std::cout << std::endl;
+        }
     }
 };
