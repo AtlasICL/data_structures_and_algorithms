@@ -155,8 +155,9 @@ public:
         std::cout << "**** Undirected weighted graph on " << m_V << " nodes ****\n";
         for (int u = 0 ; u < m_V ; u++) {
             std::cout << " ~" << u << " -> ";
-            for (int neighbour = 0; neighbour < getNeighbourhood(u).size(); neighbour++) {
-                std::cout << getNeighbourhood(u)[neighbour] << " ";
+            std::vector<int> neighbours = getNeighbourhood(u);
+            for (int neighbour = 0; neighbour < neighbours.size(); neighbour++) {
+                std::cout << neighbours[neighbour] << " ";
             }
             std::cout << std::endl;
         }
