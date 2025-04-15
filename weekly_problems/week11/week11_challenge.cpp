@@ -1,3 +1,15 @@
+/**
+ * Problem Week 11:
+ * 
+ * Problem: implement Prim's algorithm to find the minimum spanning
+ * tree of a simple weighted graph.
+ * 
+ * Challenge: implement the Floyd-Warshall algorithm to find the 
+ * shortest paths between all pairs of nodes in a weighted graph. 
+ * Test it on graphs with both positive and negative edge weights
+ * (no negative cycles). 
+ */
+
 #include <vector>
 #include <algorithm>
 #include <limits>
@@ -71,6 +83,10 @@ public:
             throw std::invalid_argument("Invalid vertex for addEdge");
         }
         m_edges.push_back(Edge{source, destination, weight});
+    }
+
+    int getNodeCount() const {
+        return m_V;
     }
 
     // Implements the Floyd-Warshall algorithm.
@@ -161,3 +177,26 @@ public:
         return path;
     }
 };
+
+int main() {
+
+    Graph g(5);
+    g.addEdge(0, 1, 5);
+    g.addEdge(0, 2, 4);
+    g.addEdge(0, 4, 10);
+    g.addEdge(1, 2, 8);
+    g.addEdge(1, 3, 2);
+    g.addEdge(2, 3, 1);
+    g.addEdge(3, 4, 3);
+
+    std::vector<std::vector<int>> shortestPathMatrix(g.getNodeCount(), std::vector<int>(g.getNodeCount(), INF));
+    
+    for (int row = 0 ; row < shortestPathMatrix.size() ; row++) {
+        for (int col = 0 ; col < shortestPathMatrix.size() ; col++) {
+            shortestPathMatrix[row][col] = g.shortestPath(row, col).s; // need to sum the edge weights 
+        }
+    }
+
+
+
+}
