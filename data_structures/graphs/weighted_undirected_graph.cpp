@@ -92,7 +92,7 @@ private:
     // @returns Returns the number of neighbours of the given node.
     // @returns Returns 0 if the node has no neighbours.
     // @throws Raises an invalid argument exception if the given node is not a valid node.
-    int getNeighbourCount(int u) {
+    int getNeighbourCount(int u) const {
         if (!isValidNode(u)) {
             throw std::invalid_argument("Invalid node for getNeighbourCount");
         }
