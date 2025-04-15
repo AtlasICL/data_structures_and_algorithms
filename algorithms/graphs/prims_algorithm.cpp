@@ -157,8 +157,9 @@ public:
         std::cout << "**** Undirected weighted graph on " << m_V << " nodes ****\n";
         for (int u = 0 ; u < m_V ; u++) {
             std::cout << " ~" << u << " -> ";
-            for (int neighbour = 0; neighbour < getNeighbourhood(u).size(); neighbour++) {
-                std::cout << getNeighbourhood(u)[neighbour] << " ";
+            std::vector<int> neighbours = getNeighbourhood(u);
+            for (int neighbour = 0; neighbour < neighbours.size(); neighbour++) {
+                std::cout << neighbours[neighbour] << " ";
             }
             std::cout << std::endl;
         }
@@ -178,14 +179,45 @@ public:
 
         struct EdgeCompare {
             bool operator()(const Edge& e1, const Edge& e2) const {
-                return e1.weight > e2.weight; // reversed, max heap
+                return e1.weight > e2.weight; // e1 is consider lower prio if its weight is larger
             }
         };
 
         // Priority queue, to get the edge with the smallest weight.
         std::priority_queue<Edge, std::vector<Edge>, EdgeCompare> prioQueue;
 
-        
+        // Lambda function, which adds all the edges connected to node u
+        // which lead to nodes not yet in the mst (hence "crossing"). 
+        auto addCrossingEdges = [&](int u) {
+            inMST[u] = true; // node u is now in the MST
+            std::vector<int> neighbours = getNeighbourhood(u);
+            // add the edges, if they connect to a node not in the MST
+            for (int neighbour : neighbours) {
+                if (!inMST[neighbour]) {
+                    int weight = getEdgeWeight(u, neighbour);
+                    prioQueue.push(Edge(u, neighbour, weight));
+                }
+            }
+        };
 
+        // Start from vertex 0. It is guaranteed to exist.
+        addCrossingEdges(0);
+
+        // Keep adding edges until we have (m_V - 1) edges in the MST (property of trees).
+        while (!prioQueue.empty() && mst.size() < static_cast<size_t>(m_V - 1)) {
+            Edge currEdge = prioQueue.top(); // Edge with lowest weight
+            prioQueue.pop(); // Remove current edge.
+            
+            // Determine which of the 2 nodes connected to the edge is NOT already in the MST.
+            int nodeToAdd = inMST[currEdge.u] ? currEdge.v : currEdge.u;
+
+            if (inMST[nodeToAdd]) { // this means both sides of the edge were already in the MST
+                continue; // so we skip this edge.
+            }
+
+            mst.push_back(currEdge); // add the current edge to the MST
+            addCrossingEdges(nodeToAdd); // and add the crossing edges from the node just added
+        }
+        return mst;
     }
 };
