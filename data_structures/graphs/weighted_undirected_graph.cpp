@@ -89,6 +89,16 @@ private:
         return neighbours;
     }
 
+    // @returns Returns the number of neighbours of the given node.
+    // @returns Returns 0 if the node has no neighbours.
+    // @throws Raises an invalid argument exception if the given node is not a valid node.
+    int getNeighbourCount(int u) {
+        if (!isValidNode(u)) {
+            throw std::invalid_argument("Invalid node for getNeighbourCount");
+        }
+        return getNeighbourhood(u).size();
+    }
+
 public:
     explicit WeightedUndirectedGraph(int V) : m_V(V), m_edges({}) {}
 
