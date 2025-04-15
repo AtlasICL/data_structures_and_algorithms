@@ -20,10 +20,10 @@
 
 ## Graphs 
 
-| Data structure | Directed graph                                   | Undirected graph                                 | Weighted undirected graph                                                                                                                                                                                |
-| -------------- | ------------------------------------------------ | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Features**   | - directed graph using an adjacency list         | - undirected graph using an adjacency list       | - weighted undirected graph using an adjacency list (of Edge structs with a weight)                                                                                                                      |
-| **Algorithms** | - depth-first search <br> - breadth-first search | - depth-first search <br> - breadth-first search | - Kruskal's algorithm, for finding MST or MSF <br> - Floyd-Warshall algorithm to find the shortest distance between all pairs of nodes <br> - method to find the shortest *path* between two given nodes |
+| Data structure | Directed graph                                   | Undirected graph                                 | Weighted undirected graph + weighted directed graph                                                                                                                                                    |
+| -------------- | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Features**   | - directed graph using an adjacency list         | - undirected graph using an adjacency list       | - weighted undirected graph using an edge list                                                                                                                                                         |
+| **Algorithms** | - depth-first search <br> - breadth-first search | - depth-first search <br> - breadth-first search | - Kruskal's algorithm, for finding MST or MSF <br> - Floyd-Warshall algorithm to find the shortest distance between all pairs of nodes <br> - method to find the shortest path between two given nodes |
 
 ## Queues
 
