@@ -122,9 +122,8 @@ public:
     }
 
     // @returns Returns the shortest path from the source node to the destination node.
-    // Return type is a std::vector. Output format: {node1, node2, ..., destination}.
-    // The source node is NOT included in the output. If source and destination are the same node, 
-    // the output will be {destination}. 
+    // Return type is a std::vector. @returns Output format: {source, node1, node2, ..., destination}.
+    // The path from a node to itself is therefore {nodeX, nodeX}.
     // If no path exists between the source and destination nodes, returns an empty vector.
     // @throws Raises an illegal argument exception if source or destination are not valid nodes in the graph.
     std::vector<int> shortestPath(int source, int destination) {
@@ -172,11 +171,33 @@ public:
             path.push_back(curr);
         }
         path.push_back(destination); // add the destination node to the path
-        path.erase(path.begin()); // we do not include the source node in the path we return
 
         return path;
     }
+
+    // @returns Returns the total weight of the given path. 
+    // In other words, the sum of the weights of the edges which comprise the path. 
+    int pathWeight(const std::vector<int>& path) const {
+        if (path.empty() || path.size() <= 1) {
+            throw std::invalid_argument("Invalid path");
+        }
+        if (path[0] == path[path.size()-1]) { // path to self
+            return 0;
+        }
+        return 1;
+    } 
 };
+
+template<typename T>
+void printTable(const std::vector<std::vector<T>>& table) {
+    for (size_t i = 0 ; i < table.size() ; i++) {
+        for (size_t j = 0 ; j < table[0].size() ; j++) {
+            std::cout << table[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+}
+
 
 int main() {
 
@@ -193,10 +214,9 @@ int main() {
     
     for (int row = 0 ; row < shortestPathMatrix.size() ; row++) {
         for (int col = 0 ; col < shortestPathMatrix.size() ; col++) {
-            shortestPathMatrix[row][col] = g.shortestPath(row, col).s; // need to sum the edge weights 
+            shortestPathMatrix[row][col] = g.pathWeight(g.shortestPath(row, col)); // need to sum the edge weights 
         }
     }
 
-
-
+    printTable(shortestPathMatrix);
 }
