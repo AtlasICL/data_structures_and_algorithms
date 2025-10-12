@@ -110,8 +110,8 @@ public:
     // Finds all indices of a value in the vector
     // @returns Returns an std::vector with the indices of the val
     // @returns Returns an empty array if the val does not occur in the vector
-    std::vector<int> find_all(const T& val) const {
-        std::vector<int> idxs = {};
+    std::vector<size_t> find_all(const T& val) const {
+        std::vector<size_t> idxs = {};
         for (size_t i = 0 ; i < m_size ; i++) {
             if (m_data[i] == val) { idxs.push_back(i); } 
         }
