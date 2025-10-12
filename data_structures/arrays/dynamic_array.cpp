@@ -30,25 +30,9 @@ private:
     size_t m_capacity;
     T* m_data;
     static const size_t MIN_CAPACITY = 1;
-    static const unsigned int GROWTH_FACTOR = 2;
-    static const unsigned int SHRINK_FACTOR = 2;
-    static const unsigned int CONTRACTION_THRESHOLD = 4;
-
-    // checks whether a shrink of the allocated memory is necessary, and performs it if it is
-    void shrink_if_necessary() {
-        if (m_capacity > MIN_CAPACITY && m_size <= m_capacity / CONTRACTION_THRESHOLD) {
-            size_t new_capacity = m_capacity / 2;
-
-            T* new_data = new T[new_capacity];
-            for (size_t i = 0 ; i < m_size ; i++) {
-                new_data[i] = std::move(m_data[i]);
-            }
-    
-            delete[] m_data;
-            m_data = new_data;
-            m_capacity = new_capacity;
-        }
-    }
+    static const size_t GROWTH_FACTOR = 2;
+    static const size_t SHRINK_FACTOR = 2;
+    static const size_t CONTRACTION_THRESHOLD = 4;
 
 public:
     Vec() : m_size(0), m_capacity(MIN_CAPACITY) {
@@ -67,23 +51,44 @@ public:
         delete[] m_data;
     }
 
-    // copy constructor for deep copy
+    // Copy constructor, for deep copy.
     Vec(const Vec& other) : m_size(other.m_size), m_capacity(other.m_capacity) {
         m_data = new T[m_capacity];
         std::copy(other.m_data, other.m_data + m_size, m_data);
     }
 
-    // assignment operator
+    // Assignment operator.
     Vec& operator=(const Vec& other) {
         // check for self-assignment
         if (this == &other) {
             return *this;
         }
 
-        Vec tmp(other); // create a copy using the copy constructor
+        Vec tmp(other); // Create a copy using the copy constructor.
         std::swap(m_size, tmp.m_size);
         std::swap(m_capacity, tmp.m_capacity);
         std::swap(m_data, tmp.m_data);
+        return *this;
+    }
+
+    Vec(Vec&& other) : m_size(other.m_size), m_capacity(other.m_capacity), m_data(other.m_data) {
+        other.m_size = 0;
+        other.m_capacity = 0; 
+        other.m_data = nullptr;
+    }
+
+    Vec& operator=(Vec&& other) noexcept {
+        if (this != &other) {
+            delete[] m_data;
+
+            m_size = other.m_size; 
+            m_capacity = other.m_capacity; 
+            m_data = other.m_data;
+
+            other.m_size = 0; 
+            other.m_capacity = 0;
+            other.m_data = nullptr;
+        }
         return *this;
     }
 
@@ -95,6 +100,15 @@ public:
             if (m_data[i] == val) { return true; }
         }
         return false;
+    }
+
+    // @return Returns the value at index i. 
+    // @throws Throws std::out_of_range if out of bounds.
+    T& at(size_t i) const {
+        if (i >= m_size) {
+            throw std::out_of_range;
+        }
+        return m_data[i];
     }
 
     // Finds the index of a value in the vector 
@@ -191,6 +205,24 @@ public:
         os << vec.m_data[vec.m_size - 1];
         os << "]\n" << std::endl;
         return os;
+    }
+
+private:
+    // Checks whether a shrink of the allocated memory is necessary (see contraction threshold).
+    // If a shrink is necessary, it is performed.
+    void shrink_if_necessary() {
+        if (m_capacity > MIN_CAPACITY && m_size <= m_capacity / CONTRACTION_THRESHOLD) {
+            size_t new_capacity = m_capacity / SHRINK_FACTOR;
+
+            T* new_data = new T[new_capacity];
+            for (size_t i = 0 ; i < m_size ; i++) {
+                new_data[i] = std::move(m_data[i]);
+            }
+    
+            delete[] m_data;
+            m_data = new_data;
+            m_capacity = new_capacity;
+        }
     }
 
 };
