@@ -51,13 +51,13 @@ public:
         delete[] m_data;
     }
 
-    // Copy constructor, for deep copy.
+    // Copy constructor
     Vec(const Vec& other) : m_size(other.m_size), m_capacity(other.m_capacity) {
         m_data = new T[m_capacity];
         std::copy(other.m_data, other.m_data + m_size, m_data);
     }
 
-    // Assignment operator.
+    // Copy assignment operator
     Vec& operator=(const Vec& other) {
         // check for self-assignment
         if (this == &other) {
@@ -71,12 +71,14 @@ public:
         return *this;
     }
 
-    Vec(Vec&& other) : m_size(other.m_size), m_capacity(other.m_capacity), m_data(other.m_data) {
+    // Move constructor
+    Vec(Vec&& other) noexcept : m_size(other.m_size), m_capacity(other.m_capacity), m_data(other.m_data) {
         other.m_size = 0;
-        other.m_capacity = 0; 
-        other.m_data = nullptr;
+        other.m_capacity = MIN_CAPACITY; 
+        other.m_data = new T[MIN_CAPACITY];
     }
 
+    // Move assignment operator
     Vec& operator=(Vec&& other) noexcept {
         if (this != &other) {
             delete[] m_data;
@@ -104,9 +106,9 @@ public:
 
     // @return Returns the value at index i. 
     // @throws Throws std::out_of_range if out of bounds.
-    T& at(size_t i) const {
+    T at(size_t i) const {
         if (i >= m_size) {
-            throw std::out_of_range;
+            throw std::out_of_range("Attempting to access elements which are out of range.");
         }
         return m_data[i];
     }
