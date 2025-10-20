@@ -5,21 +5,15 @@
 #include <iostream>
 #include <stdexcept>
 
-enum Color {
-    RED,
-    BLACK
-};
+class RBTree;
+struct RBNode;
 
-template<typename T>
+enum Color { RED, BLACK };
+
 struct RBNode {
-    T val;
-    RBNode* left;
-    RBNode* right;
-    RBNode* parent;
+    int val;
     Color color;
-};
-
-template<typename T>
-class RBTree {
-
+    RBNode* parent;
+    RBNode* left;
+    RBNode* right;     
 };
