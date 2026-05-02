@@ -1,56 +1,70 @@
-/**
- * Implementation of an AVL tree.
- */
-
 #include <iostream>
-#include <string>
 #include <stdexcept>
 #include <algorithm>
-
-template<typename T>
-struct AVLNode {
-    T val;
-    AVLNode* left;
-    AVLNode* right;
-    int height;
-
-    AVLNode(T val) : val(val), left(nullptr), right(nullptr), height(1) {}
-};
+#include <cstdint>
+#include <vector>
 
 template<typename T>
 class AVLTree {
-private:
-    AVLNode<T>* m_root;
+public:
+    struct Node {
+        T val;
+        Node* left;
+        Node* right;
+        int height;
 
-    // gets the height of a node
-    static int getHeight(AVLNode<T>* node) {
+        Node(T val) : val(val), left(nullptr), right(nullptr), height(1) {}
+    };
+
+private:
+    Node* m_root;
+
+    /**
+     * @brief Gets the height of a node.
+     * @returns Returns the height of the given node.
+     */
+    static int getHeight(Node* node) {
         if (node == nullptr) { return 0; }
         return node->height;
     }
 
-    // calculates the balance factor of a node
-    static int balanceFactor(AVLNode<T>* node) {
+    /**
+     * @brief Calculates the balance factor of a node.
+     * @returns Returns the balance factor of the given node.
+     */
+    static int balanceFactor(Node* node) {
         if (node == nullptr) { return 0; }
         return getHeight(node->left) - getHeight(node->right);
     }
 
-    // updates the height of a node (based on its children)
-    static void updateHeight(AVLNode<T>* node) {
-        if (node == nullptr) { throw std::invalid_argument("Attempted to update height of null node"); }
+    /**
+     * @brief Updates the height of a node (based on its children).
+     * @throws std::invalid_argument if called with a null node.
+     */
+    static void updateHeight(Node* node) {
+        if (node == nullptr) { 
+            throw std::invalid_argument("Attempted to update height of null node"); 
+        }
         node->height = std::max(getHeight(node->left), getHeight(node->right)) + 1;
     }
 
-    // performs a right-rotation on the subtree with root "unbalancedNode"
-    // the caller is responsible for identifying the nodes which are unbalanced
-    // returns the (new) root of the rotated subtree
-    static AVLNode<T>* rightRotate(AVLNode<T>* unbalancedNode) {
-        AVLNode<T>* leftChild = unbalancedNode->left;
-        AVLNode<T>* subtreeToReattach = leftChild->right;
+    /**
+     * @brief Performs a right-rotation on the subtree with root `unbalancedNode`.
+     * @throws std::invalid_argument if called with a null node.
+     * @returns Returns the new root of the rotated subtree. 
+     */
+    static Node* rightRotate(Node* unbalancedNode) {
+        if (unbalancedNode == nullptr) {
+            throw std::invalid_argument("Attempted to rotate a null node");
+        }
 
-        // make the unbalanced node the right child of its left child
+        Node* leftChild = unbalancedNode->left;
+        Node* subtreeToReattach = leftChild->right;
+
+        // Make the unbalanced node the right child of its left child.
         leftChild->right = unbalancedNode;
 
-        // subtreeToReattach becomes the left child of the unbalanced node
+        // subtreeToReattach becomes the left child of the unbalanced node.
         unbalancedNode->left = subtreeToReattach;
 
         updateHeight(unbalancedNode);
@@ -59,14 +73,18 @@ private:
         return leftChild; // new root
     }
 
-    // performs a left-rotation on the subtree with root "unbalancedNode"
-    // the caller is responsible for identifying the nodes which are unbalanced
-    // returns the (new) root of the rotated subtree
-    static AVLNode<T>* leftRotate(AVLNode<T>* unbalancedNode) {
-        if (unbalancedNode == nullptr) { throw std::invalid_argument("Attempted to rotate a null node"); }
+    /**
+     * @brief Performs a left-rotation on the subtree with root `unbalancedNode`.
+     * @throws std::invalid_argument if called with a null node.
+     * @returns Returns the (new) root of the rotated subtree.
+     */
+    static Node* leftRotate(Node* unbalancedNode) {
+        if (unbalancedNode == nullptr) {
+            throw std::invalid_argument("Attempted to rotate a null node");
+        }
 
-        AVLNode<T>* rightChild = unbalancedNode->right;
-        AVLNode<T>* subtreeToReattach = rightChild->left;
+        Node* rightChild = unbalancedNode->right;
+        Node* subtreeToReattach = rightChild->left;
 
         rightChild->left = unbalancedNode;
         unbalancedNode->right = subtreeToReattach;
@@ -77,23 +95,26 @@ private:
         return rightChild;
     }
 
-    // balance the given node
-    static AVLNode<T>* balance(AVLNode<T>* node) {
-        updateHeight(node); // to ensure we have up-to-date height
+    /**
+     * @brief Balances a node.
+     * @returns Returns the balanced node.
+     */
+    static Node* balance(Node* node) {
+        updateHeight(node); // Ensure we have up-to-date height.
         int bf = balanceFactor(node);
 
-        // left-heavy case
+        // Left-heavy case:
         if (bf > 1) {
-            // if "zig-zag" case, we need to transform into "linear" case
+            // If "zig-zag" case, we need to transform into "linear" case.
             if (balanceFactor(node->left) < 0) {
-                node->left = leftRotate(node->left); // transform into linear case
+                node->left = leftRotate(node->left); // Transform into linear case.
             }
             return rightRotate(node);
         }
 
-        // right-heavy case
+        // Right-heavy case:
         if (bf < -1) {
-            // if "zig-zag" case, we transform into linear case
+            // If "zig-zag" case, we transform into linear case.
             if (balanceFactor(node->right) > 0) {
                 node->right = rightRotate(node->right);
             }
@@ -103,10 +124,12 @@ private:
         return node;
     }
 
-    // helper function for insertion
-    static AVLNode<T>* insert(const T& val, AVLNode<T>* node) {
+    /**
+     * Helper function for inserting a node.
+     */
+    static Node* insert(const T& val, Node* node) {
         if (node == nullptr) {
-            return new AVLNode<T>(val);
+            return new Node(val);
         }
         if (val < node->val) {
             node->left = insert(val, node->left);
@@ -121,8 +144,10 @@ private:
         return balance(node);
     }
 
-    // helper function to free the tree memory
-    static void dealloc(AVLNode<T>* root) {
+    /**
+     * Helper function to free the memory allocated to the tree.
+     */
+    static void dealloc(Node* root) {
         if (root == nullptr) {
             return;
         }
@@ -131,30 +156,30 @@ private:
         delete root;
     }
 
-    // helper function for recursion
-    // checks if the subtree with root curr_node contains the value val
-    bool contains(const T& val, AVLNode<T>* curr_node) const {
-        if (curr_node == nullptr) {
-            return false;
-        }
-        if (curr_node->val == val) {
-            return true;
-        }
+    /**
+     * Helper function for recursion.
+     * Checks if the subtree with root curr_node contains the value val.
+     */
+    bool contains(const T& val, Node* curr_node) const {
+        if (curr_node == nullptr) { return false; }
+        if (curr_node->val == val) { return true; }
         return val < curr_node->val ? contains(val, curr_node->left) : contains(val, curr_node->right);
     }
 
-    // helper function for in-order traversal
-    static void in_order_DFS(AVLNode<T>* curr_node) {
-        if (curr_node == nullptr) {
-            return;
-        }
+    /**
+     * Helper function for in-order traversal. 
+     */ 
+    static void in_order_DFS(Node* curr_node) {
+        if (curr_node == nullptr) { return; }
         in_order_DFS(curr_node->left);
         std::cout << "| " << curr_node->val << " ";
         in_order_DFS(curr_node->right);
     }
 
-    // helper function for removing elements 
-    AVLNode<T>* remove(const T& val, AVLNode<T>* root) {
+    /**
+     * Helper function for removing elements.
+     */ 
+    Node* remove(const T& val, Node* root) {
         if (root == nullptr) { throw std::invalid_argument("val not found"); }
 
         if (val < root->val) {
@@ -164,8 +189,8 @@ private:
             root->right = remove(val, root->right);
         }
         else if (val == root->val) {
-            AVLNode<T>* left_child = root->left;
-            AVLNode<T>* right_child = root->right;
+            Node* left_child = root->left;
+            Node* right_child = root->right;
 
             // if the node had no children
             if (left_child == nullptr && right_child == nullptr) {
@@ -185,7 +210,7 @@ private:
 
             // if the node had two children, we need to find which one to connect to the grandparent
             // the node which must be connected is the in-order successor (smallest node in the right subtree)
-            AVLNode<T>* tmp = inorderSuccessor(root);
+            Node* tmp = inorderSuccessor(root);
             root->val = tmp->val;
             root->right = remove(tmp->val, root->right); // we call the remove function with the val of
             // the inorder successor of root.
@@ -197,7 +222,7 @@ private:
 
     // helper function to find the in-order successor of a node
     // @returns Returns the address of the successor (not the value!)
-    static AVLNode<T>* inorderSuccessor(AVLNode<T>* node) {
+    static Node* inorderSuccessor(Node* node) {
         if (node == nullptr) {
             return nullptr;
         }
@@ -211,35 +236,33 @@ private:
 public:
     AVLTree() : m_root(nullptr) {}
     
-    AVLTree(const T& val) : m_root(new AVLNode<T>(val)) {}
+    explicit AVLTree(const T& val) : m_root(new Node(val)) {}
     
     ~AVLTree() {
         dealloc(m_root);
     }
 
-    // inserts a value into the tree
+    /**
+     * @brief Inserts a value into the tree.
+     */
     void insert(const T& val) {
         m_root = insert(val, m_root);
     }
 
-    // removes the element from the tree
-    // @throws invalid_argument if the element does not exist
+    /**
+     * @brief Removes an element from the tree.
+     * @throws std::invalid_argument if the element does not exist.
+     */
     void remove(const T& val) {
         if (!contains(val)) { throw std::invalid_argument("Element does not exist"); }
         m_root = remove(val, m_root);
     }
 
-    // @returns Returns true if the tree contains the value val
-    // @returns false otherwise.
+    /**
+     * @brief Checks whether an element exists within the tree.
+     * @returns Returns true if the tree contains the value val, false otherwise.
+     */
     bool contains(const T& val) const {
         return contains(val, m_root);
     }
-
-    // prints the elements of the tree in-order
-    void inorder() const {
-        std::cout << "**** Performing in-order traversal ****" << std::endl;
-        in_order_DFS(m_root);
-        std::cout << std::endl;
-    }
 };
-
