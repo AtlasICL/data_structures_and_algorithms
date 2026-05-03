@@ -1,4 +1,6 @@
-# Some of my work for the module ECM1414 - Data Structures and Algorithms
+## Data Structures and Algorithms in C++
+This repository contains my work from the ECM1414 module at the University of 
+Exeter, led by Prof. Ronaldo Menezes.
 
 - ### Data structures / algorithms implemented
   - [Trees](#trees)
@@ -7,7 +9,6 @@
   - [Arrays](#arrays)
   - [Linked lists](#linked-lists)
   - [Stacks](#stacks)
-- ### [Workshop suggested programs](#workshop-suggested-programs-1)
 
 ---
 
